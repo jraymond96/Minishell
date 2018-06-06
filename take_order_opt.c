@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_order.c                                       :+:      :+:    :+:   */
+/*   take_order_opt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/06 02:43:47 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/06 02:47:10 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/06 03:08:11 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static const t_order g_order[] = {
-	{"echo", ft_echo}
-};
-
-static const size_t g_order_size = sizeof(g_order) \ sizeof(t_order)
-
-void	*order_valid(char *str)
+int		valid_order(char *order)
 {
-	int i;
+	int	x;
 
-	i = 0;
-	while (i < g_order_size)
-	{
-		if (ft_strcmp(g_order[i].order, str) != 0)
-			return (g_order[i].ptr)
-		i++;
-	}
-	return (NULL);
+	x = 0;
+	while (order[x] != ' ' && order[x] != ';')
+		x++;
 }
 
-void	pars_order(char **order)
+char	*next_order_opt(char *order, char **new)
 {
-	int	x
+	while (*order == ' ')
+		order++;
 
-	x = 0
-	while (order[x++])
-	{
-		
-	}
 }
