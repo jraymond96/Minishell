@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   path_permi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 18:35:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/04 18:48:17 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/07 20:07:23 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/07 20:38:09 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_echo(char *str)
+int		check_permi(char *path, int len)
 {
-	ft_putstr(str);
+	char	buf[len];
+
+	buf[--len] = '\0';
+	ft_memcpy(buf, path, len);
+	ft_printf("path -> %s\n", buf);
+	return (0);
+}
+
+int		path_permi(char **path)
+{
+	int	x;
+
+	x = 0;
+	while (path[++x])
+		check_permi(path[x], (len_path(path[x]) + 1));
+	return (0);
 }

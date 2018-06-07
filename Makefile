@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/06 02:23:52 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/07 20:36:13 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = main.c \
 	   del.c \
-	   check_pars_entry.c
+	   check_pars_entry.c \
+	   pars_path.c \
+	   handle_path.c \
+	   path_permi.c
 
 #COLORS
 
