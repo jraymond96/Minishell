@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 20:07:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/07 21:44:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/07 22:11:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		if_permi(char *path)
 	if (lstat(path, &inf) == -1)
 		return (-1);
 	if (!(inf.st_mode & S_IXOTH))
-		return (-1);
+		return (-1); /* peut etre la solution pour savoir si dossier existe pas ou pas de droits */
 	return (0);
 }
 
