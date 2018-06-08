@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 20:07:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/07 22:11:55 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:50:40 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		if_permi(char *path)
 	if (lstat(path, &inf) == -1)
 		return (-1);
 	if (!(inf.st_mode & S_IXOTH))
-		return (-1); /* peut etre la solution pour savoir si dossier existe pas ou pas de droits */
+		return (-2);
 	return (0);
 }
 
@@ -50,15 +50,30 @@ int		check_permi(char *path, int len)
 	return (0);
 }
 
-int		path_permi(char **path)
+t_list	*path_permi(t_list *path)
 {
-	int	x;
+	int		ret;
+	t_list	*begin;
 
-	x = 0;
-	while (path[++x])
+	begin = path;
+	while (path)
 	{
-		if (check_permi(path[x], (len_path(path[x]) + 1)) == -1)
-			ft_printf("PATH:{%s} not valide\n", path[x]);
+		if ((ret = check_permi(path->content,
+						(len_path(path->content) + 1))) < 0)
+		{
+			begin = ft_lstrmelem(begin, path);
+			if (ret == -1)
+			{
+				write(2, path->content, len_path(path->content));
+				write(2, ": not valide PATH or no permission\n", 35);
+			}
+			else
+			{
+				write(2, path->content, len_path(path->content));
+				write(2, ": PATH no permission\n", 21);
+			}
+		}
+		path = path->next;
 	}
-	return (0);
+	return (begin);
 }

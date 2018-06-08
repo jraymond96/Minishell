@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:32 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/07 19:55:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:24:26 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int		remove_double(char **paths, int len_paths)
 	return (y);
 }
 
-char	**sorting_path(char *path, int nb_path)
+t_list	*sorting_path(char *path, int nb_path)
 {
 	char	*paths[nb_path];
-	char	**new;
+	t_list	*list;
 	int		x;
 	int		len;
 	
@@ -64,37 +64,34 @@ char	**sorting_path(char *path, int nb_path)
 	paths[--nb_path] = NULL;
 	empty_paths(paths, path);
 	len = remove_double(paths, nb_path);
-	new = malloc(sizeof(char *) * (len + 1));
-	new[len] = NULL;
-	len = 0;
 	while (x < nb_path)
 	{
 		if (paths[x])
-			new[len++] = paths[x];
+			ft_lstaddback(&list, ft_lstnewnocpy((paths[x])));
 		x++;
 	}
-	return (new);
+	return (list);
 }
 
 
-char	**pars_path(char **envp)
+t_list	*pars_path(char **envp)
 {
 	int		x;
-	char	**path;
+	t_list	*path;
+	t_list	*elem;
 
 	x = 0;
-	path = NULL;
 	while (ft_strncmp(envp[x], "PATH=", 5) != 0)
 		x++;
 	if (!envp[5] || !envp[x])
 		return (NULL);
 	path = sorting_path(envp[x], (how_path(envp[x]) + 1));
-	x = 0;
-	while (path[x])
+	elem = path;
+	while (elem)
 	{
-		write(1, path[x], len_path(path[x]));
+		write(1, elem->content, len_path(elem->content));
 		ft_putchar('\n');
-		x++;
+		elem = elem->next;
 	}
 	return (path);
 }

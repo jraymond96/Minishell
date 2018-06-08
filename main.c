@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/07 20:38:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:56:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,21 @@ int	call(char **av)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*str;
-	char	**path;
+	t_list	*path;
+	t_list	*elem;
 
 	(void)argc;
 	(void)argv;
 	if (!(path = pars_path(envp)))
 		ft_putstr("AUCCUN PATH\n");
-	path_permi(path);
+	path = path_permi(path);
+	elem = path;
+	while (elem)
+	{
+		write(1, elem->content, len_path(elem->content));
+		ft_putchar('\n');
+		elem = elem->next;
+	}
 	ft_printf("%7{red}$> %{res}");
 	if (get_next_line(2, &str) == -1)
 		ft_putstr("GNL failed\n");
@@ -72,6 +80,6 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr("GNL failed\n");
 	}
 	ft_memdel((void **)&str);
-	free(path);
+	free_list(path);
 	return (0);
 }

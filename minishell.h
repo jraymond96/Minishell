@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/07 20:35:58 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:54:47 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ typedef struct	 s_order
 }				t_order;
 
 void			free_split(char **str);
+void			free_list(t_list *begin);
 int				check_entry(char *str);
-char			**pars_path(char **envp);
+t_list			*pars_path(char **envp);
 int				cmp_path(char *path1, char *path2);
 int				len_path(char *str);
 int				how_path(char *path);
-int				path_permi(char **path);
+t_list			*path_permi(t_list *path);
 
 #endif
