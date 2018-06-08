@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/08 17:56:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/08 19:56:04 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,6 @@ int	call(char **av)
 	return (0);
 }
 
-/*int	pars_line(char *order)
-{
-	char	**str;
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_printf("words : {%s}\n", str[i]);
-		i++;
-	}
-	free_split(str);
-	return (0);
-}*/
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	*str;
@@ -70,6 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr("GNL failed\n");
 	while (ft_strcmp(str, "exit") != 0)
 	{
+		pars_order(str, path, envp);
 		if (check_entry(str) == 0)
 			ft_printf("%#{green}%s%{res}\n", str);
 		else
