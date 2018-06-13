@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/08 19:54:42 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/13 05:34:58 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME) : $(OBJS) ./ft_printf/libftprintf.a ./libft/libft.a
 
 ce : libft ft_printf $(NAME)
 	@echo "$(_YELLOW)$(NAME) result ...$(_END)"
-	@./minishell
+	@valgrind ./minishell
 
 %.o : %.c
 		@$(CC) $(FLAGS) -o $@ -c $^

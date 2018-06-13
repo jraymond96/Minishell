@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/25 19:01:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 05:29:58 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/13 01:30:00 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/13 06:53:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft/libft.h"
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-void	free_split(char **str)
+int		call_unsetenv(char **argv)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_memdel((void **)&str[i++]);
-	ft_memdel((void **)&str);
+	//return (setenv(argv[1], argv[2], 1));
+	return (unsetenv(argv[1]));
 }
 
-void	del_lstpath(void *content, size_t size_content)
+int	main(int argc, char **argv, char **envp)
 {
-	ft_memdel((void **)&content);
-	size_content = 0;
-}
-
-void	free_list(t_list **begin)
-{
-	ft_lstdel(begin, del_lstpath);
+	argc = -1;
+	if (call_unsetenv(argv) == -1)
+	{
+		ft_putendl(strerror(errno));
+		return (0);
+	}
+	while (envp[++argc])
+		ft_putendl(envp[argc]);
+	return (0);
 }

@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del.c                                              :+:      :+:    :+:   */
+/*   unsetenv_builtin.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/25 19:01:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 05:29:58 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/13 06:46:17 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/13 06:56:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_split(char **str)
+int		main(int argc, char **argv )
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_memdel((void **)&str[i++]);
-	ft_memdel((void **)&str);
-}
-
-void	del_lstpath(void *content, size_t size_content)
-{
-	ft_memdel((void **)&content);
-	size_content = 0;
-}
-
-void	free_list(t_list **begin)
-{
-	ft_lstdel(begin, del_lstpath);
+	if (ft_strchr(str, '='))
+	{
+		ft_putstr("Invalid argument");
+		return (-1);
+	}
 }

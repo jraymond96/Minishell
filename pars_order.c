@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/08 21:11:39 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/13 06:28:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_list	*order_valid(t_list *paths, char *order)
 	int ret;
 
 	ret = -1;
-	ft_printf("order -> %s\n", order);
 	while (paths && ret != 0)
 	{
 		ret = access_order(paths->content, order, len_path(paths->content),
@@ -54,17 +53,29 @@ t_list	*take_order(char *shell_line, t_list *paths)
 	y = x;
 	while(shell_line[x] && (shell_line[x] != ';' && shell_line[x] != ' '))
 		x++;
-	shell_line[x] = '\0';
+	shell_line[x] = '\0'; /* check en premier si il fait partis d un builtin cree */
 	return (order_valid(paths, &shell_line[y]));
+}
+
+int		check_endstr(char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ' && *str != ';')
+			return (1);
+		str++;
+	}
+	return (0);
 }
 
 void	pars_order(char *shell_line, t_list *paths, char **envp)
 {
 	int		x;
+	int		len;
 	t_list	*good_path;
 
-	(void)envp;
 	x = 0;
+	len = ft_strlen(shell_line);
 	while (shell_line[x] && shell_line[x] != ';')
 		x++;
 	good_path = take_order(shell_line, paths);
@@ -74,8 +85,6 @@ void	pars_order(char *shell_line, t_list *paths, char **envp)
 		write(1, good_path->content, len_path(good_path->content));
 		ft_putchar('\n');
 	}
-	else
-		ft_printf("EXISTE PAS\n");
-	if (shell_line[++x])
+	if (x != len && check_endstr(&shell_line[++x]) == 1)
 		pars_order(&shell_line[x], paths, envp);
 }

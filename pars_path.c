@@ -6,92 +6,73 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:32 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/08 17:24:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/13 05:36:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	empty_paths(char **paths, char *path)
+int		if_pathexist(char *paths, t_list *lst_path)
 {
-	int	x;
+	if (!paths)
+		return (-1);
+	while (lst_path)
+	{
+		if (cmp_path(paths, lst_path->content) == 0)
+			return (-1);
+		lst_path = lst_path->next;
+	}
+	return (0);
+}
 
-	x = 1;
-	*paths = (path + 5);
+t_list	*sorting_path(char *path)
+{
+	int		x;
+	char	*tmp;
+	t_list	*lst_path;
+
+	x = 0;
+	lst_path = NULL;
+	path = (path + 5);
+	tmp = path;
 	while (*path)
 	{
+		x++;
 		if (*path == ':')
-			paths[x++] = (path + 1);
+		{
+			if (if_pathexist(tmp, lst_path) == 0)	
+				ft_lstaddback(&lst_path, ft_lstnew(tmp, x));
+			x = 0;
+			tmp = (path + 1);
+		}
 		path++;
 	}
+	return (lst_path);
 }
 
-int		remove_double(char **paths, int len_paths)
+t_list	*handle_path(char **envp)
 {
-	int	x;
-	int	y;
+	t_list	*paths;
 
-	x = 0;
-	while (x < len_paths)
+	if (!(paths = pars_path(envp)))
 	{
-		y = 0;
-		while (paths[x] && y < len_paths)
-		{
-			if (x != y && cmp_path(paths[y], paths[x]) == 0)
-				paths[y] = NULL;
-			y++;
-		}
-		x++;
+		ft_putstr("AUCCUN PATH\n");
+		return (NULL);
 	}
-	y = 0;
-	x = 0;
-	while (x < len_paths)
-	{
-		if (paths[x++])
-			y++;
-	}
-	return (y);
+	paths = path_permi(paths);
+	return (paths);
 }
-
-t_list	*sorting_path(char *path, int nb_path)
-{
-	char	*paths[nb_path];
-	t_list	*list;
-	int		x;
-	int		len;
-	
-	x = 0;
-	paths[--nb_path] = NULL;
-	empty_paths(paths, path);
-	len = remove_double(paths, nb_path);
-	while (x < nb_path)
-	{
-		if (paths[x])
-			ft_lstaddback(&list, ft_lstnewnocpy((paths[x])));
-		x++;
-	}
-	return (list);
-}
-
 
 t_list	*pars_path(char **envp)
 {
 	int		x;
 	t_list	*path;
-	t_list	*elem;
 
 	x = 0;
 	while (ft_strncmp(envp[x], "PATH=", 5) != 0)
 		x++;
 	if (!envp[5] || !envp[x])
 		return (NULL);
-	path = sorting_path(envp[x], (how_path(envp[x]) + 1));
-	elem = path;
-	while (elem)
-	{
-		write(1, elem->content, len_path(elem->content));
-		ft_putchar('\n');
-		elem = elem->next;
-	}
+	path = sorting_path(envp[x]);
 	return (path);
 }
