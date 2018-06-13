@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 06:01:20 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/13 07:46:26 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	call(char **av)
 			ft_printf("error wait\n");
 		ft_printf("exec du pere\n");
 	}
-	if (ret != 0)
+	if (ret == 0)
 	{
 		if (execve("/bin/ls", av, NULL) == -1)
 			ft_printf("error\n");
