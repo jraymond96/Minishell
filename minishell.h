@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 05:30:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/14 12:19:01 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,12 @@ int				len_path(char *str);
 int				how_path(char *path);
 t_list			*path_permi(t_list *path);
 t_list			*handle_path(char **envp);
+
+/*
+** -----------------------BUILTINS-----------------------------
+*/
+
+int				ft_unsetenv(char *value, char **envp);
+int				ft_echo(char **arg);
 
 #endif

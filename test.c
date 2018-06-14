@@ -6,12 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 01:30:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 08:49:22 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/14 12:25:48 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
+#include "minishell.h"
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
@@ -25,8 +26,14 @@ int		call_unsetenv(char **argv)
 int	main(int argc, char **argv, char **envp)
 {
 	argc = -1;
-	if (execve("/Users/jraymond/Minishell/echo", argv, envp) == -1)
-		ft_putstr("ERROR execve\n");
+	/*while (envp[++argc])
+		ft_putendl(envp[argc]);*/
+	ft_echo(argv);
+	return (0);
+	ft_putstr("------------------------------------------\n");
+	argc = -1;
+	while (envp[++argc])
+		ft_putendl(envp[argc]);
 	return (0);
 	if (call_unsetenv(argv) == -1)
 	{

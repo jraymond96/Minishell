@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:02:59 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 08:49:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/14 12:20:50 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,23 @@ void	join_arg(char **argv, char *line)
 	*line = '\0';
 }
 
-int	main(int argc, char **argv)
+int		ft_echo(char **arg)
 {
 	int		x;
 	char	*line;
 
-	x = 1;
-	argc = ft_strcmp("-n", argv[1]) == 0 ? 1 : 0;
+	x = ft_strcmp("-n", arg[1]) == 0 ? 1 : 0;
 	line = NULL;
-	if (argc && argv[2])
+	if (x && arg[2])
 	{
-		line = malloc(len_all(&argv[2]));
-		join_arg(&argv[2], line);
+		line = malloc(len_all(&arg[2]));
+		join_arg(&arg[2], line);
 		ft_putstr(line);
 	}
-	else if (!argc && argv[1])
+	else if (!x && arg[1])
 	{
-		line = malloc(len_all(&argv[1]));
-		join_arg(&argv[1], line);
+		line = malloc(len_all(&arg[1]));
+		join_arg(&arg[1], line);
 		ft_putendl(line);
 	}
 	if (line)

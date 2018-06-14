@@ -6,13 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 06:35:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/14 12:24:24 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		setenv_builtin(char	**arg, char **envp)
+int		ft_setenv(char **arg)
 {
 	while ()
 }
