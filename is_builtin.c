@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv_builtin.c                                   :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/14 13:32:29 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/14 13:39:50 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/14 15:21:17 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_value(char **arg)
+int		is_builtin(char *str)
 {
-	int	x;
-
-	x = 0;
-	while (arg[x])
-		x++;
-	if x
-}
-
-int		ft_setenv(char **arg)
-{
-	
+	if (ft_strcmp(str, "env") == 0)
+		return (1);
+	else if (ft_strcmp(str, "setenv") == 0)
+		return (2);
+	else if (ft_strcmp(str, "unsetenv") == 0)
+		return (3);
+	else if (ft_strcmp(str, "cd") == 0)
+		return (4);
+	else if (ft_strcmp(str, "echo") == 0)
+		return (5);
+	else
+		return (0);
 }

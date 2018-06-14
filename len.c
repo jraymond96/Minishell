@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv_builtin.c                                   :+:      :+:    :+:   */
+/*   len.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/14 13:32:29 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/14 14:35:05 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/14 14:42:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_value(char **arg)
+int		len_order(char *str)
 {
-	int	x;
+	int	i;
 
-	x = 0;
-	while (arg[x])
-		x++;
-	if x
-}
-
-int		ft_setenv(char **arg)
-{
-	
+	i = 0;
+	while (str[i] && str[i] != ';')
+		i++;
+	return (i);
 }

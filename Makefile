@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/13 05:34:58 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/14 15:32:40 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ SRCS = main.c \
 	   pars_path.c \
 	   handle_path.c \
 	   path_permi.c \
-	   pars_order.c
+	   pars_order.c \
+	   is_builtin.c \
+	   len.c \
+	   if_valid_order.c
 
 #COLORS
 
@@ -49,7 +52,7 @@ $(NAME) : $(OBJS) ./ft_printf/libftprintf.a ./libft/libft.a
 
 ce : libft ft_printf $(NAME)
 	@echo "$(_YELLOW)$(NAME) result ...$(_END)"
-	@valgrind ./minishell
+	@valgrind --leak-check=full ./minishell
 
 %.o : %.c
 		@$(CC) $(FLAGS) -o $@ -c $^
