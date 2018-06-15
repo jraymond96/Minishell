@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/14 15:32:40 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/15 10:04:12 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS = main.c \
 	   pars_order.c \
 	   is_builtin.c \
 	   len.c \
-	   if_valid_order.c
+	   if_valid_order.c \
+	   cpy_envp.c
 
 #COLORS
 
