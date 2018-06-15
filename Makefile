@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/15 10:04:12 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/15 14:16:31 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,11 @@ SRCS = main.c \
 	   is_builtin.c \
 	   len.c \
 	   if_valid_order.c \
-	   cpy_envp.c
+	   cpy_envp.c \
+	   call_order.c \
+	   call_builtin.c \
+	   echo_builtin.c \
+	   unsetenv_builtin.c
 
 #COLORS
 
@@ -53,7 +57,7 @@ $(NAME) : $(OBJS) ./ft_printf/libftprintf.a ./libft/libft.a
 
 ce : libft ft_printf $(NAME)
 	@echo "$(_YELLOW)$(NAME) result ...$(_END)"
-	@valgrind --leak-check=full ./minishell
+	@./minishell
 
 %.o : %.c
 		@$(CC) $(FLAGS) -o $@ -c $^

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 12:27:34 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/15 14:09:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int				is_builtin(char *str);
 int				len_order(char *str);
 char			**cpy_envp(char **envp);
 int				call_order(char **line, t_list *path, char **envp);
+void			call_builtin(int ret, char ***env, char **split);
 t_list			*path_permi(t_list *path);
 t_list			*handle_path(char **envp);
 
@@ -46,7 +47,7 @@ t_list			*handle_path(char **envp);
 ** -----------------------BUILTINS-----------------------------
 */
 
-int				ft_unsetenv(char *value, char **envp);
+int				ft_unsetenv(char **value, char **envp);
 int				ft_echo(char **arg);
 
 #endif

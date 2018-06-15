@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:46:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/14 13:24:10 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/15 16:42:06 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,32 @@ void	erase_value(char **envp, char *erase)
 		if (envp[y] != erase)
 			envp[++x] = envp[y];
 		else
+		{
+			free(envp[y]);
 			envp[++x] = envp[++y];
+		}
 	}
-	envp[x] = NULL;
+	envp[++x] = NULL;
 }
 
-int		ft_unsetenv(char *value, char **envp)
+int		ft_unsetenv(char **value, char **envp)
 {
 	int		x;
 	int		len;
 
 	x = 0;
-	if (!value || ft_strchr(value, '='))
+	if (!value[1])
+	{
+		ft_putstr("No argument for unsetenv\n");
+		return (-1);
+	}
+	if (!value || ft_strchr(value[1], '=') || tab_len(value) != 2)
 	{
 		ft_putstr("Invalid argument\n");
 		return (-1);
 	}
-	len = ft_strlen(value);
-	while ((ft_memcmp(envp[x], value, len) != 0 || envp[x][len] != '=') &&
+	len = ft_strlen(value[1]);
+	while ((ft_memcmp(envp[x], value[1], len) != 0 || envp[x][len] != '=') &&
 				envp[x])
 		x++;
 	if (envp[x])
