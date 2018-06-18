@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 13:50:52 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 15:02:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/18 17:56:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	call_builtin(int ret, char ***env, char **split)
 	if (ret == 1)
 		return;
 	else if (ret == 2)
-		return;
+	{
+		if (ft_setenv(split, env) == -1)
+			exit (0);
+	}
 	else if (ret == 3)
 		ft_unsetenv(split, *env);
 	else if (ret == 4)

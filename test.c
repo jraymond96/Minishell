@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 01:30:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 11:26:11 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/18 17:11:06 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,23 @@
 #include <string.h>
 #include <errno.h>
 
-void	call_unsetenv(char ***envp)
+int		call_unsetenv(char ***envp, char **argv)
 {
-	if (!(*envp = malloc(sizeof(char *) * 3)))
-		exit(0);
-	ft_putstr("TOOT\n");
-	*(envp[0]) = ft_strdup("salut ");
-	ft_putstr("TOOT\n");
-	*(envp[1]) = ft_strdup("comment ");
-	//return (setenv(argv[1], argv[2], 1));
-	//return (unsetenv(argv[1]));
+	int argc;
+
+	argc = -1;
+	setenv(argv[1], argv[2], ft_atoi(argv[3]));
+	while ((*envp)[++argc])
+		ft_printf("%s\n", (*envp)[argc]);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	argc = -1;
-	(void)argv;
 	/*while (envp[++argc])
 		ft_putendl(envp[argc]);*/
-	call_unsetenv(&envp);
-	while (envp[++argc])
-		ft_printf("{%s}", envp[argc]);
+	call_unsetenv(&envp, argv);
 	return (0);
 	/*ft_putstr("------------------------------------------\n");
 	argc = -1;

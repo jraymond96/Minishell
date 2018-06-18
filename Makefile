@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/15 14:16:31 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/18 18:04:34 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ SRCS = main.c \
 	   call_order.c \
 	   call_builtin.c \
 	   echo_builtin.c \
-	   unsetenv_builtin.c
+	   unsetenv_builtin.c \
+	   setenv_builtin.c \
+	   error_setenv.c
 
 #COLORS
 

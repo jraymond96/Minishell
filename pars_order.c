@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 16:42:04 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/18 17:53:11 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	free_split(split);
 	z = -1;
 	while ((*envp)[++z])
-		ft_printf("%{green}%s%{res}\n", (*envp)[z]);
+		ft_putendl((*envp)[z]);
 	if (x != len && check_endstr(&shell_line[++x]) == 1)
 		pars_order(&shell_line[x], paths, envp);
 }
