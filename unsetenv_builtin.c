@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:46:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 16:42:06 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/19 13:38:02 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,24 @@ void	erase_value(char **envp, char *erase)
 	int	x;
 	int	y;
 
-	x = -1;
+	x = 0;
 	y = -1;
 	while (envp[++y])
 	{
 		if (envp[y] != erase)
-			envp[++x] = envp[y];
+			envp[x++] = envp[y];
 		else
 		{
-			free(envp[y]);
-			envp[++x] = envp[++y];
+			ft_memdel((void **)&envp[y]);
+			if (envp[y + 1])
+			{
+				envp[x++] = envp[++y];
+			}
+			else
+				break;
 		}
 	}
-	envp[++x] = NULL;
+	envp[x] = NULL;
 }
 
 int		ft_unsetenv(char **value, char **envp)
