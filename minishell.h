@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 10:25:35 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/20 15:12:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <dirent.h>
 # include <fcntl.h>
 
 typedef struct	 s_order
@@ -32,6 +33,7 @@ int				check_entry(char *str);
 t_list			*pars_path(char **envp);
 void			pars_order(char *shell_line, t_list *paths, char ***envp);
 t_list			*if_valid_order(t_list *paths, char *shell_line, int *ret);
+int				if_permi(char *path);
 int				cmp_path(char *path1, char *path2);
 int				len_path(char *str);
 int				how_path(char *path);

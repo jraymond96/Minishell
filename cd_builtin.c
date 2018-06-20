@@ -6,45 +6,105 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 11:58:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/20 15:41:34 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		if_permi_exist(char *path)
+int		check_first_folder(char *buf)
 {
-	DIR	dir;
+	int			x;
+	int			flag;
+	struct stat stats;
 
-	opendir
+	x = 0;
+	flag = 0;
+	while (buf[++x] && buf[x] != '/')
+		;
+	if (!buf[x])
+		flag++;
+	buf[x] = '\0';
+	if (lstat(buf, &stats) == -1)
+	{
+		ft_printf("cd: no such file or directory: %s\n", buf);
+		return (-1);
+	}
+	else if (!(stats.st_mode & S_IXOTH))
+	{
+		ft_printf("cd: permission denied: %s\n", buf);
+		return (-1);
+	}
+	if (!flag)
+		buf[x] = '/';
+	return (0);
+}
+
+int		folder_exist(DIR *dir, int len, char *folder, char *path)
+{
+	struct dirent	*info;
+
+	while ((info = readdir(dir)))
+	{
+		if (ft_memcmp(info->d_name, folder, len) == 0)
+			break;
+	}
+	if (!info)
+	{
+		ft_printf("cd: no such file or directory: %s\n", path);
+		return (-1);
+	}
+	if (if_permi(path) == -2)
+	{
+		ft_printf("cd: permission denied: %s\n", path);
+		return (-1);
+	}
+	return (0);
+}
+
+int		if_exist_permi(char *path, DIR *dir)
+{
+	int				len;
+	char			*tmp;
+	int				flag;
+
+	tmp = path;
+	flag = 0;
+	while ((len = ft_strclen(path, '/')) && !flag)
+	{
+		if (!path[len])
+			flag++;
+		path[len] = '\0';
+		if (folder_exist(dir, len, path, tmp) != 0)
+			return (-1);
+		if (!(dir = opendir(tmp)))
+		{
+			ft_putstr("error opendir\n");
+			return (-2);
+		}
+		if (!flag)
+			path[len] = '/';
+		path += len;
+	}
+	return (0);
 }
 
 int		check_path(char *path, int len)
 {
-	char	buf[len];
-	int		x;
-	DIR		dir;
+	char		buf[len];
+	int			x;
+	DIR			*dir;
 
-	dir = opendir
 	buf[--len] = '\0';
-	x = 0;
+	x = -1;
 	ft_memcpy(buf, path, len);
-	while (buf[x])
-	{
-		if (buf[x] == '/' && x != 0)
-		{
-			buf[x] = '\0';
-			if ((len = if_permi_exist(buf)) <= 0)
-				return (len);
-			buf[x] = '/';
-			
-		}
-		x++;
-	}
-	if ((len = if_permi(buf)) <= 0)
-		return (len);
+	if (check_first_folder(buf) == -1)
+		return (-2);
+	if (!(dir = opendir(buf)))
+		return (-1);
+	if ((len = if_exist_permi(&buf[x], dir)) < 0)
+		return (-2);
 	return (0);
-}
 }
 
 int		len_new_path(char *pwd, char *ret, char **param)
@@ -76,7 +136,10 @@ int		replace_p0byp1(char **path, char **param, char *pwd)
 		return (-1);
 	ft_memcpy(*path, pwd, (ret - pwd));
 	ft_strcpy(&(*path)[ret - pwd], param[1]);
-	ft_strcpy(&(*path)[ret - pwd + ft_strlen(param[1])], &ret[ft_strlen(*param)]);
+	ft_strcpy(&(*path)[ret - pwd + ft_strlen(param[1])],
+				&ret[ft_strlen(*param)]);
+	if (check_path(*path, ft_strlen(*path)) < 0)
+		return (-2);
 	return (0);
 }
 
@@ -103,8 +166,10 @@ int		ft_cd(char **param, char **envp)
 			return (0);
 	}
 	else if(!(path = ft_strmidjoin(&envp[x][4], *param, "/")))
-		return (-1);
+		return (-1);	
 	ft_printf("PWD -> %s\n", path);
+	if (check_path(path, ft_strlen(path)) < 0)
+		return (0);
 	if (chdir(path) == -1)
 		return (0);
 	getcwd(new_path, 1000);
