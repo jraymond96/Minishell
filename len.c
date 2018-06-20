@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 14:35:05 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/14 14:42:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/20 08:45:50 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ int		len_order(char *str)
 	while (str[i] && str[i] != ';')
 		i++;
 	return (i);
+}
+
+int		len_envp(char **envp)
+{
+	int len;
+
+	len = 0;
+	while (envp[len])
+		len++;
+	return (len);
 }

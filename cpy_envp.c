@@ -6,26 +6,15 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 09:58:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/18 17:52:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/20 08:45:47 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** cpy_envp : just copy envp | cpy_envp1 : copy envp with one more place at the
-**                                          the end;
+** cpy_envp : just copy envp | cpy_envp1 : copy envp with one more place at the;
 */
-
-int		len_envp(char **envp)
-{
-	int len;
-
-	len = 0;
-	while (envp[len])
-		len++;
-	return (len);
-}
 
 char	**cpy_envp(char **envp)
 {
