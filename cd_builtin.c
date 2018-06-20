@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 15:41:34 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/20 17:30:37 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,15 @@ int		folder_exist(DIR *dir, int len, char *folder, char *path)
 {
 	struct dirent	*info;
 
+	ft_printf("folder -> %s\n", folder);
 	while ((info = readdir(dir)))
 	{
+		ft_printf("name -> %s\n", info->d_name);
 		if (ft_memcmp(info->d_name, folder, len) == 0)
+		{
+			ft_putstr("MATCH\n");
 			break;
+		}
 	}
 	if (!info)
 	{
@@ -70,8 +75,10 @@ int		if_exist_permi(char *path, DIR *dir)
 
 	tmp = path;
 	flag = 0;
-	while ((len = ft_strclen(path, '/')) && !flag)
+	ft_printf("act path -> %s\n", path);
+	while ((len = ft_strclen(&path[1], '/')) && !flag)
 	{
+		len++;
 		if (!path[len])
 			flag++;
 		path[len] = '\0';
@@ -92,17 +99,24 @@ int		if_exist_permi(char *path, DIR *dir)
 int		check_path(char *path, int len)
 {
 	char		buf[len];
-	int			x;
 	DIR			*dir;
+	char		*ret;
+	char		tmp;
 
 	buf[--len] = '\0';
-	x = -1;
 	ft_memcpy(buf, path, len);
 	if (check_first_folder(buf) == -1)
 		return (-2);
+	if ((ret = ft_strchr(&buf[1], '/')))
+	{
+		tmp = *(ret + 1);
+		*(ret + 1) = '\0';
+	}
 	if (!(dir = opendir(buf)))
 		return (-1);
-	if ((len = if_exist_permi(&buf[x], dir)) < 0)
+	if (ret)
+		*(ret + 1) = tmp;
+	if ((len = if_exist_permi(buf, dir)) < 0)
 		return (-2);
 	return (0);
 }
@@ -168,7 +182,7 @@ int		ft_cd(char **param, char **envp)
 	else if(!(path = ft_strmidjoin(&envp[x][4], *param, "/")))
 		return (-1);	
 	ft_printf("PWD -> %s\n", path);
-	if (check_path(path, ft_strlen(path)) < 0)
+	if (check_path(path, (ft_strlen(path) + 1)) < 0)
 		return (0);
 	if (chdir(path) == -1)
 		return (0);
