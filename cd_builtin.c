@@ -6,119 +6,45 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 17:30:37 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/21 17:57:16 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_first_folder(char *buf)
+int		back_path(char **path)
 {
-	int			x;
-	int			flag;
-	struct stat stats;
+	char	*last_ocu;
+	char	pwd[1024];
 
-	x = 0;
-	flag = 0;
-	while (buf[++x] && buf[x] != '/')
-		;
-	if (!buf[x])
-		flag++;
-	buf[x] = '\0';
-	if (lstat(buf, &stats) == -1)
-	{
-		ft_printf("cd: no such file or directory: %s\n", buf);
-		return (-1);
-	}
-	else if (!(stats.st_mode & S_IXOTH))
-	{
-		ft_printf("cd: permission denied: %s\n", buf);
-		return (-1);
-	}
-	if (!flag)
-		buf[x] = '/';
+	pwd = getcwd(&pwd, 1024)
+	last_ocu = ft_strrchr(pwd, '/');
+	last_ocu = '\0';
+	if (!(*path = ft_strdup(pwd)))
+		return (-1)
 	return (0);
 }
 
-int		folder_exist(DIR *dir, int len, char *folder, char *path)
+char	*found_home(char **envp)
 {
-	struct dirent	*info;
+	int	x;
 
-	ft_printf("folder -> %s\n", folder);
-	while ((info = readdir(dir)))
-	{
-		ft_printf("name -> %s\n", info->d_name);
-		if (ft_memcmp(info->d_name, folder, len) == 0)
-		{
-			ft_putstr("MATCH\n");
-			break;
-		}
-	}
-	if (!info)
-	{
-		ft_printf("cd: no such file or directory: %s\n", path);
-		return (-1);
-	}
-	if (if_permi(path) == -2)
-	{
-		ft_printf("cd: permission denied: %s\n", path);
-		return (-1);
-	}
-	return (0);
+	x = -1
+	while (envp[++x] && ft_memcmp(envp[x], "HOME", 4) != 0);
+	return (envp[x]);
 }
 
-int		if_exist_permi(char *path, DIR *dir)
+int		creat_pars_path(char **path, char *param, char **envp)
 {
-	int				len;
-	char			*tmp;
-	int				flag;
-
-	tmp = path;
-	flag = 0;
-	ft_printf("act path -> %s\n", path);
-	while ((len = ft_strclen(&path[1], '/')) && !flag)
+	if (!param)
+		*path = ft_strdup(buff);
+	else if (ft_strlen(param) == 1 && *param == '~')
 	{
-		len++;
-		if (!path[len])
-			flag++;
-		path[len] = '\0';
-		if (folder_exist(dir, len, path, tmp) != 0)
+		if (!(*path = ft_strdup((found_home(envp) + 4))))
 			return (-1);
-		if (!(dir = opendir(tmp)))
-		{
-			ft_putstr("error opendir\n");
-			return (-2);
-		}
-		if (!flag)
-			path[len] = '/';
-		path += len;
 	}
-	return (0);
-}
-
-int		check_path(char *path, int len)
-{
-	char		buf[len];
-	DIR			*dir;
-	char		*ret;
-	char		tmp;
-
-	buf[--len] = '\0';
-	ft_memcpy(buf, path, len);
-	if (check_first_folder(buf) == -1)
-		return (-2);
-	if ((ret = ft_strchr(&buf[1], '/')))
-	{
-		tmp = *(ret + 1);
-		*(ret + 1) = '\0';
-	}
-	if (!(dir = opendir(buf)))
-		return (-1);
-	if (ret)
-		*(ret + 1) = tmp;
-	if ((len = if_exist_permi(buf, dir)) < 0)
-		return (-2);
-	return (0);
+	else if (ft_strcmp(*param, "..") == 0)
+		return (back_path(path));
 }
 
 int		len_new_path(char *pwd, char *ret, char **param)
@@ -135,12 +61,14 @@ int		len_new_path(char *pwd, char *ret, char **param)
 	return (x);
 }
 
-int		replace_p0byp1(char **path, char **param, char *pwd)
+int		replace_p0byp1(char **path, char **param)
 {
 	char	*ret;
+	char	pwd[1024];
 	int		x;
 
 	x = -1;
+	getcwd(&pwd, 1024);
 	if (!(ret = ft_strstr(pwd, *param)))
 	{
 		ft_printf("cd: string not in pwd: %s\n", *param);
@@ -160,7 +88,6 @@ int		replace_p0byp1(char **path, char **param, char *pwd)
 int		ft_cd(char **param, char **envp)
 {
 	char	*path;
-	char	new_path[1000];
 	int		x;
 	int		ret;
 
@@ -174,19 +101,17 @@ int		ft_cd(char **param, char **envp)
 		return (0);
 	if (len_envp(param) == 2)
 	{
-		if ((ret = replace_p0byp1(&path, param, &envp[x][4])) == -1)
+		if ((ret = replace_p0byp1(&path, param)) == -1)
 			return (-1);
 		else if (ret == -2)
 			return (0);
 	}
 	else if(!(path = ft_strmidjoin(&envp[x][4], *param, "/")))
 		return (-1);	
-	ft_printf("PWD -> %s\n", path);
 	if (check_path(path, (ft_strlen(path) + 1)) < 0)
 		return (0);
 	if (chdir(path) == -1)
 		return (0);
-	getcwd(new_path, 1000);
 	ft_printf("PATH -> %s\n", new_path);
 	ft_memdel((void **)&path);
 	return (0);

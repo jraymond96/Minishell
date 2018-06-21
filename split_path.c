@@ -1,26 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   split_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/13 01:30:00 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/21 14:49:38 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/21 11:35:14 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/21 14:48:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
 #include "minishell.h"
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
-int	main(int argc, char **argv, char **envp)
+int		nb_split(char *path)
 {
-	argc = -1;
-	if (ft_cd(&argv[1], envp) == -1)
-		exit (0);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (*path)
+	{
+		if (*path == '/')
+			i++;
+		path++;
+	}
+	return (i);
+}
+
+char	**split_path(char *path)
+{
+	int		len;
+	char	**new;
+	int		x;
+
+	if (!(new = ft_malloc(sizeof(char *) * ((len = nb_split(path)) + 1))))
+		return (NULL);
+	new[len] = NULL;
+	len = -1;
+	x = -1;
+	while (path[++len])
+	{
+		if (path[len] == '/')
+			new[++x] = &path[len];
+	}
+	return (new);
 }
