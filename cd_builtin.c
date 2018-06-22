@@ -6,18 +6,16 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/21 17:57:16 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/22 12:50:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		back_path(char **path)
+int		back_path(char **path, char *pwd)
 {
 	char	*last_ocu;
-	char	pwd[1024];
 
-	pwd = getcwd(&pwd, 1024)
 	last_ocu = ft_strrchr(pwd, '/');
 	last_ocu = '\0';
 	if (!(*path = ft_strdup(pwd)))
@@ -34,17 +32,69 @@ char	*found_home(char **envp)
 	return (envp[x]);
 }
 
+void	rm_lastfolder(char *buff)
+{
+	char	*last_ocu;
+
+	if ((last_ocu = ft_strrchr(buff, '/')))
+		*(last_ocu + 1) = '\0';
+}
+
+int		absolute_path(char **path, char *param, char *buff)
+{
+	int		i_buff;
+	char	**split;
+	int		x;
+
+	if (!(split = split_path(param)))
+		return (-1);
+	x = 0;
+	while (split[++x])
+		*split[x] = '\0';
+	x = -1;
+	while (split[++x])
+	{
+		if (ft_strcmp(&split[x][1], "..") != 0)
+		{
+			if (x == 0)
+				ft_strcpy(buff, split[x]);
+			else
+				ft_strcpy(&buff[ft_strlen(buff)], &split[x][1]);
+		}
+		else
+			rm_lastfolder(buff);
+	}
+	if (!(*path = ft_strdup(buff)))
+		return (-1);
+	return (0);
+}
+
+int		long_path(char **path, char *param, char *pwd)
+{
+	char	buff[1024]
+	if (*param == '/')
+		return ();
+	else
+	
+}
+
 int		creat_pars_path(char **path, char *param, char **envp)
 {
+	char	pwd[1024];
+
+	pwd = getcwd(&pwd, 1024)
 	if (!param)
-		*path = ft_strdup(buff);
+		*path = ft_strdup(pwd);
 	else if (ft_strlen(param) == 1 && *param == '~')
 	{
 		if (!(*path = ft_strdup((found_home(envp) + 4))))
 			return (-1);
 	}
 	else if (ft_strcmp(*param, "..") == 0)
-		return (back_path(path));
+		return (back_path(path, pwd));
+	else if (*param == '/')
+		long_path(path, param);
+
 }
 
 int		len_new_path(char *pwd, char *ret, char **param)
