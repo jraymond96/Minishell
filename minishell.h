@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/21 14:32:02 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/25 18:59:56 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_list			*path_permi(t_list *path);
 t_list			*handle_path(char **envp);
 char			**split_path(char *path);
 int				check_path(char *path, int len);
+void			first_char_cd(char *buff, char *param, char *pwd);
 
 /*
 ** -----------------------BUILTINS-----------------------------

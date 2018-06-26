@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 11:35:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/22 12:50:59 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 15:16:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		nb_split(char *path)
 			i++;
 		path++;
 	}
-	return (i);
+	return (i = i == 0 ? 1 : i);
 }
 
 char	**split_path(char *path)
@@ -39,7 +39,7 @@ char	**split_path(char *path)
 	x = -1;
 	while (path[++len])
 	{
-		if (path[len] == '/')
+		if (path[len] == '/' || len == 0)
 			new[++x] = &path[len];
 	}
 	return (new);

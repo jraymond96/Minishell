@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/22 12:50:55 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 17:06:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		back_path(char **path, char *pwd)
 	char	*last_ocu;
 
 	last_ocu = ft_strrchr(pwd, '/');
-	last_ocu = '\0';
+	*last_ocu = '\0';
 	if (!(*path = ft_strdup(pwd)))
-		return (-1)
+		return (-1);
 	return (0);
 }
 
@@ -27,7 +27,7 @@ char	*found_home(char **envp)
 {
 	int	x;
 
-	x = -1
+	x = -1;
 	while (envp[++x] && ft_memcmp(envp[x], "HOME", 4) != 0);
 	return (envp[x]);
 }
@@ -37,64 +37,56 @@ void	rm_lastfolder(char *buff)
 	char	*last_ocu;
 
 	if ((last_ocu = ft_strrchr(buff, '/')))
+		*last_ocu = '\0';
+	if ((last_ocu = ft_strrchr(buff, '/')))
 		*(last_ocu + 1) = '\0';
 }
 
 int		absolute_path(char **path, char *param, char *buff)
 {
-	int		i_buff;
 	char	**split;
 	int		x;
 
 	if (!(split = split_path(param)))
 		return (-1);
-	x = 0;
-	while (split[++x])
-		*split[x] = '\0';
 	x = -1;
 	while (split[++x])
 	{
-		if (ft_strcmp(&split[x][1], "..") != 0)
+		if (ft_memcmp(&split[x][1], "..", 2) != 0)
 		{
 			if (x == 0)
-				ft_strcpy(buff, split[x]);
+				ft_memcpy(buff, split[x], (ft_strclen(&split[x][1], '/') + 1));
 			else
-				ft_strcpy(&buff[ft_strlen(buff)], &split[x][1]);
+				ft_memcpy(&buff[ft_strlen(buff)], &split[x][1],
+							ft_strclen(&split[x][1], '/'));
+			ft_strcpy(&buff[ft_strlen(buff)], "/");
 		}
 		else
 			rm_lastfolder(buff);
+	ft_printf("_path_ -> %s\n", buff);
 	}
 	if (!(*path = ft_strdup(buff)))
 		return (-1);
+	free(split);
 	return (0);
 }
 
-int		long_path(char **path, char *param, char *pwd)
-{
-	char	buff[1024]
-	if (*param == '/')
-		return ();
-	else
-	
-}
-
-int		creat_pars_path(char **path, char *param, char **envp)
+int		creat_pars_path(char **path, char *param)
 {
 	char	pwd[1024];
+	char	buff[1024];
+	char	new_path[1024];
 
-	pwd = getcwd(&pwd, 1024)
+	getcwd(pwd, 1024);
+	first_char_cd(new_path, param, pwd);
 	if (!param)
-		*path = ft_strdup(pwd);
-	else if (ft_strlen(param) == 1 && *param == '~')
 	{
-		if (!(*path = ft_strdup((found_home(envp) + 4))))
-			return (-1);
+		ft_putstr("titi 0\n");
+		*path = ft_strdup(pwd);
 	}
-	else if (ft_strcmp(*param, "..") == 0)
-		return (back_path(path, pwd));
-	else if (*param == '/')
-		long_path(path, param);
-
+	ft_printf("new_path -> %s\n", new_path);
+	absolute_path(path, new_path, buff);
+	return (0);
 }
 
 int		len_new_path(char *pwd, char *ret, char **param)
@@ -118,7 +110,7 @@ int		replace_p0byp1(char **path, char **param)
 	int		x;
 
 	x = -1;
-	getcwd(&pwd, 1024);
+	getcwd(pwd, 1024);
 	if (!(ret = ft_strstr(pwd, *param)))
 	{
 		ft_printf("cd: string not in pwd: %s\n", *param);
@@ -140,6 +132,7 @@ int		ft_cd(char **param, char **envp)
 	char	*path;
 	int		x;
 	int		ret;
+	char	test[1024];
 
 	x = -1;
 	path = NULL;
@@ -156,13 +149,16 @@ int		ft_cd(char **param, char **envp)
 		else if (ret == -2)
 			return (0);
 	}
-	else if(!(path = ft_strmidjoin(&envp[x][4], *param, "/")))
-		return (-1);	
+	else
+	{
+		if (creat_pars_path(&path, *param) == -1)
+			return (-1);
+	}
 	if (check_path(path, (ft_strlen(path) + 1)) < 0)
 		return (0);
 	if (chdir(path) == -1)
-		return (0);
-	ft_printf("PATH -> %s\n", new_path);
+		return (-1);
 	ft_memdel((void **)&path);
+	ft_printf("act_pwd -> %s\n", getcwd(test, 1024));
 	return (0);
 }
