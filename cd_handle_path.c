@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:30:45 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 17:02:09 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:31:54 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,6 @@ int		check_path(char *path, int len)
 	if (ret)
 		*(ret + 1) = tmp;
 	if ((len = if_exist_permi(buf, dir)) < 0)
-	{
-		closedir(dir);
 		return (-2);
-	}
 	return (0);
 }

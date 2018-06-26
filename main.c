@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 16:42:02 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 18:24:16 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 	t_list	*path;
 	char	**envcpy;
-	int		x;
 
 	(void)argv;
 	ft_printf("%7{red}$> %{res}");
@@ -37,9 +36,6 @@ int	main(int argc, char **argv, char **envp)
 		else
 			ft_printf("%#{red}!!!! %s !!!!%{res}\n", str);
 		path = handle_path(envcpy);
-		x = -1;
-		while (envcpy[++x])
-			ft_printf("%{red}%s%{res}\n", envcpy[x]);
 		pars_order(str, path, &envcpy);
 		ft_memdel((void **)&str);
 		free_list(&path);

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/25 18:59:56 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 19:34:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ t_list			*path_permi(t_list *path);
 t_list			*handle_path(char **envp);
 char			**split_path(char *path);
 int				check_path(char *path, int len);
-void			first_char_cd(char *buff, char *param, char *pwd);
+int				first_char_cd(char *buff, char *param, char *pwd, char *home);
+char			*found_home(char **envp);
+int				creat_pars_path(char **path, char *param, char **envp);
 
 /*
 ** -----------------------BUILTINS-----------------------------
 */
 
-int				ft_cd(char **value, char **envp);
+int				ft_cd(char **param, char **envp);
 int				error_cd(char **param);
 int				ft_unsetenv(char **value, char **envp);
 int				ft_setenv(char **arg, char ***envp);

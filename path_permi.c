@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 20:07:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 15:41:32 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 19:11:51 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		if_permi(char *path)
 		return (0);
 	if (lstat(path, &inf) == -1)
 		return (-1);
-	if (!(inf.st_mode & S_IXOTH))
+	if (!(inf.st_mode & S_IXUSR))
 		return (-2);
 	return (0);
 }

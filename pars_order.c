@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/19 11:51:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/26 19:36:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	int		ret;
 	t_list	*good_path;
 	char	**split;
-	int		z;
 
 	x = 0;
-	z = -1;
 	len = ft_strlen(shell_line);
 	ret = 0;
 	while (shell_line[x] && shell_line[x] != ';')
@@ -48,10 +46,6 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	else
 		call_builtin(ret, envp, split);
 	free_split(split);
-	z = -1;
-	while ((*envp)[++z])
-		ft_putendl((*envp)[z]);
-	ft_putstr("-----------------------------------\n");
 	if (x != len && check_endstr(&shell_line[++x]) == 1)
 		pars_order(&shell_line[x], paths, envp);
 }
