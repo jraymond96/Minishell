@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_builtin.c                                     :+:      :+:    :+:   */
+/*   iter_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/15 13:50:52 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 16:24:29 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/27 17:04:02 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	call_builtin(int ret, char ***env, char **split)
+int		flags(char *param, int x, int flags)
 {
-	(void)env;
-	if (ret == 1)
-		ft_env(split, *env);
-	else if (ret == 2)
+	if (x == 0)
+
+}
+
+int		check_entry(char **param)
+{
+	int	info;
+	int	x;
+
+	info = 0;
+	x = -1;
+	if (!*param)
+		return (-1);
+	while (param[++x])
 	{
-		if (ft_setenv(split, env) == -1)
-			exit (0);
+		if (param[x][0] == '-')
+			flags;
+		else if (ft_strchr(param[x], '='))
+			modif_envp;
+		else
+			order_exist;
 	}
-	else if (ret == 3)
-		ft_unsetenv(split, *env);
-	else if (ret == 4)
-	{
-		split[1] ? ft_cd(&split[1], *env) : ft_cd(NULL, *env);
-	}
-	else if (ret == 5)
-		ft_echo(split);
+}
+
+int		inter_env(char **param, char ***envp)
+{
+	
 }

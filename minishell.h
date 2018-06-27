@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 19:34:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:04:01 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,12 @@ int				ft_unsetenv(char **value, char **envp);
 int				ft_setenv(char **arg, char ***envp);
 int				error_setenv(char **arg);
 int				ft_echo(char **arg);
+int				ft_env(char **param, char **envp);
+
+/*
+** --------------------------MASK------------------------------
+*/
+
+# define FLAGS (1 << 0)
 
 #endif
