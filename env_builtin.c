@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 14:55:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 16:58:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/27 19:09:32 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ int		ft_env(char **param, char **envp)
 {
 	int		nb_call;
 	char	**new_envp;
-	char	**next
-	char	*tmp
+	char	**next;
+	char	*tmp;
 
-	(void)envp;
 	nb_call = nb_call_env(param);
 	new_envp = cpy_envp(envp);
 	while (nb_call--)
@@ -51,7 +50,7 @@ int		ft_env(char **param, char **envp)
 		next = next_call((param + 1));
 		tmp = *next;
 		*next = NULL;
-		
+		iter_env(param, &new_envp);
 		param = next;
 		*param = tmp;
 	}
