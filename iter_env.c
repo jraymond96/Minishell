@@ -6,44 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 19:09:34 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/27 20:59:48 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		if_no_env(char ***envp, char *param)
-{
-	char	**new;
-	int		x;
-
-	new = cpy_envp1(*envp);
-	free_split(*envp);
-	*envp = new;
-	x = -1;
-	while ((*envp)[++x]);
-	if (!((*envp)[x] = ft_strdup(param)))
-		return (-1);
-	return (0);
-}
-
-int		handle_envp(char *param, char ***envp, char *equal)
-{
-	int		x;
-	int		len;
-
-	if (param == equal)
-		return (0);
-	len = equal - param;
-	x = -1;
-	while ((*envp)[++x] && ft_memcmp((*envp)[x], param, len));
-	if (!((*envp)[x]))
-	{
-		if (if_no_env(envp, param) == -1)
-			return (-1);
-	}
-	return (0);
-}
 
 int		check_flags(char *param, char ***envp)
 {
@@ -61,11 +28,26 @@ int		check_flags(char *param, char ***envp)
 	return (0);
 }
 
+int		call_order(char **param, char **envp)
+{
+	t_list	*paths;
+	t_list	*good_path;
+	int		ret;
+
+	paths = handle_path(envp);
+	godd_path = if_valid_order(path, *param, &ret);
+	
+}
+
 int		iter_env(char **param, char ***envp)
 {
 	int		x;
 	char	*ret;
 
+	x = -1;
+	while ((*envp)[++x])
+		ft_putendl((*envp)[x]);
+	ft_putstr("-------------------------------------------\n");
 	x = -1;
 	if (param[1][0] == '-')
 	{
@@ -80,6 +62,10 @@ int		iter_env(char **param, char ***envp)
 			if ((handle_envp(param[x], envp, ret) == -1))
 				return (-1);
 		}
+		else
 	}
+	x = -1;
+	while ((*envp)[++x])
+		ft_putendl((*envp)[x]);
 	return (0);
 }

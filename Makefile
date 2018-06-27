@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/27 18:45:31 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/27 20:47:13 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SRCS = main.c \
 	   error_cd.c \
 	   creat_pars_path.c \
 	   env_builtin.c \
-	   iter_env.c
+	   iter_env.c \
+	   handle_envp_env.c
 
 #COLORS
 
