@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:38:19 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:52:42 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ int		env_call_order(char **param, char ***envp)
 		call_order(param, good_path, *envp);
 	}
 	else
-	{
 		call_builtin(ret, envp, param);
-	}
 	return (0);
 }
 

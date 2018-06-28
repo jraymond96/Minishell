@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:32 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/15 11:15:21 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:31:53 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ t_list	*handle_path(char **envp)
 	t_list	*paths;
 
 	if (!(paths = pars_path(envp)))
-	{
-		ft_putstr("AUCCUN PATH\n");
 		return (NULL);
-	}
 	paths = path_permi(paths);
 	return (paths);
 }

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 14:43:08 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 14:12:04 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:31:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_list	*order_valid(t_list *paths, char *order)
 			return (paths);
 		paths = paths->next;
 	}
-	ft_printf("zsh: command not found: %s\n", order);
+	ft_dprintf(2, "zsh: command not found: %s\n", order);
 	return (NULL);
 }
 
@@ -72,10 +72,11 @@ t_list	*if_valid_order(t_list *paths, char *shell_line, int *ret)
 		shell_line++;
 	while (shell_line[x] && shell_line[x] != ';' && shell_line[x] != ' ')
 		x++;
-	order = ft_memdup(shell_line, x);
+	if (!(order = ft_memdup(shell_line, x)))
+		exit(0);
 	if (!paths && thats_builtin(order) != 1)
 	{
-		ft_printf("zsh: command not found: %s\n", order);
+		ft_dprintf(2, "zsh: command not found: %s\n", order);
 		ret1++;
 	}
 	else if ((*ret = is_builtin(order)) > 0)

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 13:40:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 18:10:54 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:45:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	call_order(char **line, t_list *path, char **envp)
 	char	*all_path;
 
 	if ((ret = fork()) == -1)
-		ft_putstr("limit fork\n");
+		ft_putstr_fd(2, "fork: error\n");
 	if (ret > 0)
 	{
 		if (wait(NULL) == -1)
-			ft_printf("error wait\n");
+			ft_putstr_fd(2, "wait: error\n");
 	}
 	if (ret == 0)
 	{
@@ -55,7 +55,7 @@ int	call_order(char **line, t_list *path, char **envp)
 		else
 			all_path = join_path(".", *line);
 		if (execve(all_path, line, envp) == -1)
-			ft_printf("error execve\n");
+			ft_putstr_fd(2, "error execve\n");
 	}
 	return (0);
 }

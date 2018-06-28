@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 09:58:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:20:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:50:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	**cpy_envp(char **envp)
 	new[len] = NULL;
 	len = -1;
 	while (envp[++len])
-		new[len] = ft_strdup(envp[len]);
+	{
+		if (!(new[len] = ft_strdup(envp[len])))
+			exit(0);
+	}
 	return (new);
 }
 
@@ -50,6 +53,9 @@ char	**cpy_envp1(char **envp)
 	new[len] = NULL;
 	len = -1;
 	while (envp[++len])
-		new[len] = ft_strdup(envp[len]);
+	{
+		if (!(new[len] = ft_strdup(envp[len])))
+			exit(0);
+	}
 	return (new);
 }

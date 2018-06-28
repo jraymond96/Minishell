@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:39:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 18:51:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:56:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		is_builtin(char *str)
 		return (4);
 	else if (ft_strcmp(str, "echo") == 0)
 		return (5);
-	else
-		return (0);
+	else if (ft_strcmp(str, "exit") == 0)
+		return (6);
+	return (0);
 }
