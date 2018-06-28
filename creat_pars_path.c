@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 19:25:19 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 15:54:36 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:43:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,8 @@ int		creat_pars_path(char **path, char *param, char **envp)
 		ft_putstr("cd: HOME not set\n");
 		return (-1);
 	}
-	ft_printf("new -> %s\n", param);
 	if (!param)
-	{
-		ft_putstr("titi 0\n");
 		*path = ft_strdup(pwd);
-	}
-	ft_printf("path absolute -> %s\n", new_path);
 	absolute_path(path, new_path, buff);
 	return (0);
 }

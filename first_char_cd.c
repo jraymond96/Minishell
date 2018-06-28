@@ -6,17 +6,16 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 18:27:15 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 19:07:15 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:56:38 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	first_char_cd(char *buff, char *param, char *pwd, char *home)
+int		first_char_cd(char *buff, char *param, char *pwd, char *home)
 {
 	char	*last_ocu;
 
-	ft_printf("toto -> %s\n", pwd);
 	if (!home || !home[5])
 		return (-1);
 	if (*param == '~')

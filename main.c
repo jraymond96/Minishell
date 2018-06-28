@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 20:49:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:46:22 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_strcmp(str, "exit") == 0)
 			break;
 		if (check_entry(str) == 0)
-			ft_printf("%#{green}%s%{res}\n", str);
-		else
-			ft_printf("%#{red}!!!! %s !!!!%{res}\n", str);
-		path = handle_path(envcpy);
-		pars_order(str, path, &envcpy);
+		{
+			path = handle_path(envcpy);
+			pars_order(str, path, &envcpy);
+			free_list(&path);
+		}
 		ft_memdel((void **)&str);
-		free_list(&path);
 		ft_printf("%7{red}$> %{res}");
 	}
 	ft_memdel((void **)&str);

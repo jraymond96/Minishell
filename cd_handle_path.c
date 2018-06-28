@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:30:45 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 14:37:05 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:01:43 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int		folder_exist(DIR *dir, int len, char *folder, char *path)
 	while ((info = readdir(dir)))
 	{
 		if (ft_memcmp(info->d_name, folder, len) == 0)
-		{
-			ft_printf("MATCH PATH: %s || FOLDER: %s\n", path, folder);
 			break;
-		}
 	}
 	if (!info)
 	{

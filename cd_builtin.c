@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 14:36:31 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 16:01:41 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int		ft_cd(char **param, char **envp)
 	}
 	if (error_cd(param) == -1)
 		return (0);
+	if (!envp)
+		return (0);
 	while (envp[++x] && ft_memcmp(envp[x], "PWD", 3) != 0)
 		;
-	if (!envp[x])
-		return (0);
 	if (len_envp(&param[1]) == 2)
 	{
 		if ((ret = replace_p0byp1(&path, param)) == -1)
@@ -86,7 +86,6 @@ int		ft_cd(char **param, char **envp)
 		path[ft_strlen(path) - 1] = '\0';
 	if (check_path(path, (ft_strlen(path) + 1)) < 0)
 		return (0);
-	ft_printf("chdir_path -> %s\n", path);
 	if (chdir(path) == -1)
 		return (-1);
 	ft_memdel((void **)&path);

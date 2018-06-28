@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 20:59:48 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:38:19 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,49 @@ int		check_flags(char *param, char ***envp)
 	return (0);
 }
 
-int		call_order(char **param, char **envp)
+int		env_call_order(char **param, char ***envp)
 {
 	t_list	*paths;
 	t_list	*good_path;
 	int		ret;
 
-	paths = handle_path(envp);
-	godd_path = if_valid_order(path, *param, &ret);
-	
+	paths = handle_path(*envp);
+	good_path = if_valid_order(paths, *param, &ret);
+	if (good_path)
+	{
+		ret = -1;
+		call_order(param, good_path, *envp);
+	}
+	else
+	{
+		call_builtin(ret, envp, param);
+	}
+	return (0);
 }
 
-int		iter_env(char **param, char ***envp)
+int		write_envp(char	**envp)
+{
+	int	x;
+
+	x = -1;
+	if (!envp)
+		return (0);
+	else
+	{
+		while (envp[++x])
+			ft_printf("%s\n", envp[x]);
+	}
+	return (0);
+}
+
+int		iter_env(char **param, char ***envp, int nb)
 {
 	int		x;
 	char	*ret;
 
-	x = -1;
-	while ((*envp)[++x])
-		ft_putendl((*envp)[x]);
-	ft_putstr("-------------------------------------------\n");
-	x = -1;
+	if (len_envp(param) == 1 && !nb)
+		return (write_envp(*envp));
+	x = 0;
 	if (param[1][0] == '-')
 	{
 		if (check_flags(param[1], envp) == -1)
@@ -63,9 +85,13 @@ int		iter_env(char **param, char ***envp)
 				return (-1);
 		}
 		else
+		{
+			env_call_order(&param[x], envp);
+			x = -1;
+			break;
+		}
 	}
-	x = -1;
-	while ((*envp)[++x])
-		ft_putendl((*envp)[x]);
+	if (x != -1 && !nb)
+		return (write_envp(*envp));
 	return (0);
 }

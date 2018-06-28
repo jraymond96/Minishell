@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 20:15:46 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 18:58:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:42:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	wrong_pars(char *str, int x)
 {
 	if (x == 1)
-		ft_printf("x -> 1:zsh: parse error near `%c%c'\n", str[-1], *str);
+		ft_printf("zsh: parse error near `%c%c'\n", str[-1], *str);
 	else
 		ft_printf("zsh: commande not found `%c'\n", *str);
 }

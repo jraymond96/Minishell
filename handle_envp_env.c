@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 20:45:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 20:47:44 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:27:09 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		if_no_env(char ***envp, char *param)
 	int		x;
 
 	new = cpy_envp1(*envp);
-	free_split(*envp);
+	if (!envp)
+		free_split(*envp);
 	*envp = new;
 	x = -1;
 	while ((*envp)[++x]);
@@ -32,7 +33,6 @@ int		if_env(char	**envp, char *param)
 	int	len;
 
 	len = ft_strclen(param, '=') + 1;
-	ft_printf("envp -> %s || len : %d\n", &(*envp)[len], len);
 	if (!param[len])
 	{
 		(*envp)[len] = '\0';
@@ -51,8 +51,9 @@ int		handle_envp(char *param, char ***envp, char *equal)
 		return (0);
 	len = equal - param;
 	x = -1;
-	while ((*envp)[++x] && ft_memcmp((*envp)[x], param, len));
-	if (!((*envp)[x]))
+	if (*envp)
+		while ((*envp)[++x] && ft_memcmp((*envp)[x], param, len));
+	if (!*envp || !((*envp)[x]))
 	{
 		if (if_no_env(envp, param) == -1)
 			return (-1);

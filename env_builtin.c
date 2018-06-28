@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 14:55:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/27 19:09:32 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/28 15:46:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_env(char **param, char **envp)
 		next = next_call((param + 1));
 		tmp = *next;
 		*next = NULL;
-		iter_env(param, &new_envp);
+		iter_env(param, &new_envp, nb_call);
 		param = next;
 		*param = tmp;
 	}
