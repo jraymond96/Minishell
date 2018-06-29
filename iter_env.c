@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:52:42 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:43:52 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ int		iter_env(char **param, char ***envp, int nb)
 	int		x;
 	char	*ret;
 
-	if (len_envp(param) == 1 && !nb)
-		return (write_envp(*envp));
+	if (len_envp(param) == 1)
+	{
+		if (!nb)
+			return (write_envp(*envp));
+		return (0);
+	}
 	x = 0;
 	if (param[1][0] == '-')
 	{

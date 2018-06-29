@@ -1,46 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_order.c                                       :+:      :+:    :+:   */
+/*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/15 13:40:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 19:39:56 by jraymond         ###   ########.fr       */
+/*   Created: 2018/06/29 19:30:47 by jraymond          #+#    #+#             */
+/*   Updated: 2018/06/29 19:50:17 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
-char	*join_path(char *str1, char *str2)
-{
-	char	*new;
-	int		len;
-
-	len = ft_strlen(str1) + ft_strlen(str2) + 1;
-	if (!(new = ft_malloc(len + 1)))
-		exit (0);
-	new[len] = '\0';
-	len = -1;
-	while (*str1)
-	{
-		new[++len] = *str1;
-		str1++;
-	}
-	new[++len] = '/';
-	while (*str2)
-	{
-		new[++len] = *str2;
-		str2++;
-	}
-	return (new);
-}
-
-int	call_order(char **line, t_list *path, char **envp)
+int	call_bin(char **line, char *path, char **envp)
 {
 	pid_t	ret;
-	char	*all_path;
 
 	if ((ret = fork()) == -1)
 		ft_putstr_fd("fork: error\n", 2);
@@ -51,12 +25,25 @@ int	call_order(char **line, t_list *path, char **envp)
 	}
 	if (ret == 0)
 	{
-		if (path)
-			all_path = join_path(path->content, *line);
-		else
-			all_path = join_path(".", *line);
-		if (execve(all_path, line, envp) == -1)
+		if (execve(path, line, envp) == -1)
 			ft_putstr_fd("execve: error\n", 2);
 	}
+	return (0);
+}
+
+int		ft_bin(char **param, char **envp)
+{
+	char	*path;
+	int		ret;
+
+	if (creat_pars_path(&path, *param, envp) == -1)
+		return (-1);
+	if (check_path(path, (ft_strlen(path) + 1), *param) < 0)
+		return (0);
+	ret = ft_strlen(path) - 1;
+	if (path[ret] == '/')
+		path[ret] = '\0';
+	if (call_bin(&param[1], path, envp) == -1)
+		return (-1);
 	return (0);
 }

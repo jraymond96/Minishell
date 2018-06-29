@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 14:43:08 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:31:43 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:27:58 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		thats_builtin(char *order)
 	else if (ft_strcmp(order, "unsetenv") == 0)
 		return (1);
 	else if (ft_strcmp(order, "setenv") == 0)
+		return (1);
+	else if (*order == '/' || ft_memcmp(order, "./", 2) == 0)
 		return (1);
 	else
 		return (0);

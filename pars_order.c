@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:58:57 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:38:26 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ int		check_endstr(char *str)
 	return (0);
 }
 
+void	cut_space_usless(char **split)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (split[++x])
+	{
+		y = -1;
+		while (split[x][++y] && split[x][y] != ' ' && split[x][y] != ';')
+			;
+		split[x][y] = '\0';
+	}
+}
+
 void	pars_order(char *shell_line, t_list *paths, char ***envp)
 {
 	int		x;
@@ -37,8 +52,9 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	while (shell_line[x] && shell_line[x] != ';')
 		x++;
 	good_path = if_valid_order(paths, shell_line, &ret);
-	if (!(split = ft_memsplit(shell_line, x)))
+	if (!(split = split_line(shell_line, x)))
 		exit(0);
+	cut_space_usless(split);
 	if (good_path)
 	{
 		ret = -1;

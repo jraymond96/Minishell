@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 19:25:19 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:43:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 19:15:28 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int		absolute_path(char **path, char *param, char *buff)
 			else if (split[x][1] != '.' || ft_strclen(&split[x][1], '/') != 1)
 				ft_memcpy(&buff[ft_strlen(buff)], &split[x][1], len);
 			len += x == 0 ? total + 1 : total;
-			ft_strcpy(&buff[len], "/");
+			if (ft_strlen(buff) != 1)
+				ft_strcpy(&buff[len], "/");
+			else
+				buff[len] = '\0';
 		}
 		else 
 			rm_lastfolder(buff);
@@ -90,7 +93,11 @@ int		creat_pars_path(char **path, char *param, char **envp)
 		return (-1);
 	}
 	if (!param)
-		*path = ft_strdup(pwd);
-	absolute_path(path, new_path, buff);
+	{
+		if (!(*path = ft_strdup(pwd)))
+			exit (0);
+	}
+	if (absolute_path(path, new_path, buff) == -1)
+		exit (0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 13:50:52 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 16:55:33 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 19:31:59 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ void	call_builtin(int ret, char ***env, char **split)
 		ft_echo(split);
 	else if (ret == 6)
 		exit(0);
+	else if (ret == 7)
+		ft_bin(split, *env);
 }

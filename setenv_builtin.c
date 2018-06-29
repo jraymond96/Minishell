@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/18 17:56:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 15:14:07 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ char	**add_namevalue(char *name, char *value, char ***envp)
 	len = 0;
 	x = 0;
 	if (!(name_value = ft_strmidjoin(name, value, "=")))
-		return (NULL);
+		exit(0);
 	if (!(new = cpy_envp1(*envp)))
-		return (NULL);
+		exit(0);
 	while (new[x])
 		x++;
 	new[x] = name_value;
@@ -59,7 +59,7 @@ char	*change_value(char *value, char **envp, int size)
 		return (*envp);
 	}
 	if (!(new = ft_malloc((size + 1) + (len = ft_strlen(value)) + 1)))
-		return (NULL);
+		exit (0);
 	ft_memcpy(new, *envp, (size + 1));
 	ft_strcpy(&new[size + 1], value);
 	ft_memdel((void **)envp);
@@ -92,15 +92,9 @@ int		ft_setenv(char **arg, char ***envp)
 	if ((ret = error_setenv(arg)) == 0)
 	{
 		if (!(name = if_name(arg[1], *envp)))
-		{
-			if (!add_namevalue(arg[1], arg[2], envp))
-				return (-1);
-		}
+			add_namevalue(arg[1], arg[2], envp);
 		else if (name && arg[3] && *arg[3] != '0' && ft_strlen(arg[3]) == 1)
-		{
-			if (!change_value(arg[2], name, ft_strclen(*name, '=')))
-				return (-1);
-		}
+			change_value(arg[2], name, ft_strclen(*name, '='));
 		return (0);
 	}
 	if (ret == -1)

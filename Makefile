@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/27 20:47:13 by jraymond         ###   ########.fr        #
+#    Updated: 2018/06/29 19:30:54 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c \
 	   del.c \
@@ -41,7 +41,9 @@ SRCS = main.c \
 	   creat_pars_path.c \
 	   env_builtin.c \
 	   iter_env.c \
-	   handle_envp_env.c
+	   handle_envp_env.c \
+	   split_line.c \
+	   exec_bin.c
 
 #COLORS
 

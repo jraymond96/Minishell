@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:26:06 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 19:40:06 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ void			call_builtin(int ret, char ***env, char **split);
 t_list			*path_permi(t_list *path);
 t_list			*handle_path(char **envp);
 char			**split_path(char *path);
-int				check_path(char *path, int len);
+int				check_path(char *path, int len, char *param);
 int				first_char_cd(char *buff, char *param, char *pwd, char *home);
 char			*found_home(char **envp);
 int				creat_pars_path(char **path, char *param, char **envp);
+char			**split_line(char *str, size_t size);
 
 /*
 ** -----------------------BUILTINS-----------------------------
@@ -58,6 +59,7 @@ int				creat_pars_path(char **path, char *param, char **envp);
 
 int				ft_cd(char **param, char **envp);
 int				error_cd(char **param);
+int				ft_error2cd(int ret, char *param);
 int				ft_unsetenv(char **value, char **envp);
 int				ft_setenv(char **arg, char ***envp);
 int				error_setenv(char **arg);
@@ -65,5 +67,6 @@ int				ft_echo(char **arg);
 int				ft_env(char **param, char **envp);
 int				iter_env(char **param, char ***envp, int nb);
 int				handle_envp(char *param, char ***envp, char *equal);
+int				ft_bin(char **param, char **envp);
 
 #endif

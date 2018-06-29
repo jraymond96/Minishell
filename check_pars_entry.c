@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 20:15:46 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:03:04 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:06:56 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wrong_pars(char *str, int x)
 int		valid_separator(char c)
 {
 	if (ft_isalnum(c) == 1 || c == '.' || c == '_' || c == '-' || c == '/' ||
-			c == '~' || c == '=')
+			c == '~' || c == '=' || c == '"' || c == 39)
 		return (1);
 	else
 		return (0);

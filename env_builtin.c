@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 14:55:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:46:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:43:53 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int		ft_env(char **param, char **envp)
 		param = next;
 		*param = tmp;
 	}
+	free_split(new_envp);
 	return (0);
 }

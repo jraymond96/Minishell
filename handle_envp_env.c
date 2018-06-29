@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 20:45:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 15:27:09 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:05:12 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		handle_envp(char *param, char ***envp, char *equal)
 	if (!*envp || !((*envp)[x]))
 	{
 		if (if_no_env(envp, param) == -1)
-			return (-1);
+			exit(0);
 	}
 	else
 		if_env(&(*envp)[x], param);

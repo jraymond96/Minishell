@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:32 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:31:53 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:09:28 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_list	*sorting_path(char *path)
 	int		x;
 	char	*tmp;
 	t_list	*lst_path;
+	t_list	*elem;
 
 	x = 0;
 	lst_path = NULL;
@@ -40,8 +41,10 @@ t_list	*sorting_path(char *path)
 		x++;
 		if (*path == ':')
 		{
+			if (!(elem = ft_lstnew(tmp, --x)))
+				exit(0);
 			if (if_pathexist(tmp, lst_path) == 0)	
-				ft_lstaddback(&lst_path, ft_lstnew(tmp, --x));
+				ft_lstaddback(&lst_path, elem);
 			x = 0;
 			tmp = (path + 1);
 		}

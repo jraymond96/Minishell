@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 13:39:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 16:56:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:28:42 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int		is_builtin(char *str)
 		return (5);
 	else if (ft_strcmp(str, "exit") == 0)
 		return (6);
+	else if (*str == '/' || ft_memcmp(str, "./", 2) == 0)
+		return (7);
 	return (0);
 }

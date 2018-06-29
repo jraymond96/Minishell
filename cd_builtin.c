@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 16:01:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 19:16:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ int		replace_p0byp1(char **path, char **param)
 	int		x;
 
 	x = -1;
-	getcwd(pwd, 1024);
+	ft_putstr("toto\n");
+	if (!(getcwd(pwd, 1024)))
+	{
+		ft_putstr_fd("getcwd: error\n", 2);
+		return (-1);
+	}
 	if (!(ret = ft_strstr(pwd, *param)))
 	{
 		ft_printf("cd: string not in pwd: %s\n", *param);
@@ -45,7 +50,7 @@ int		replace_p0byp1(char **path, char **param)
 	ft_strcpy(&(*path)[ret - pwd], param[1]);
 	ft_strcpy(&(*path)[ret - pwd + ft_strlen(param[1])],
 				&ret[ft_strlen(*param)]);
-	if (check_path(*path, ft_strlen(*path)) < 0)
+	if (check_path(*path, ft_strlen(*path), *param) < 0)
 		return (-2);
 	return (0);
 }
@@ -82,9 +87,9 @@ int		ft_cd(char **param, char **envp)
 		if (creat_pars_path(&path, *param, envp) == -1)
 			return (-1);
 	}
-	if (path[ft_strlen(path) - 1] == '/')
+	if (path[(ret = ft_strlen(path)) - 1] == '/' && ret != 1)
 		path[ft_strlen(path) - 1] = '\0';
-	if (check_path(path, (ft_strlen(path) + 1)) < 0)
+	if (check_path(path, (ft_strlen(path) + 1), *param) < 0)
 		return (0);
 	if (chdir(path) == -1)
 		return (-1);

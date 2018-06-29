@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:02:59 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/20 08:43:37 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:51:46 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,20 @@ int		ft_echo(char **arg)
 	line = NULL;
 	if (x && arg[2])
 	{
-		line = malloc(len_all(&arg[2]));
+		if (!(line = malloc(len_all(&arg[2]))))
+			exit(0);
 		join_arg(&arg[2], line);
 		ft_putstr(line);
 	}
 	else if (!x && arg[1])
 	{
-		line = malloc(len_all(&arg[1]));
+		if (!(line = malloc(len_all(&arg[1]))))
+			exit(0);
 		join_arg(&arg[1], line);
 		ft_putendl(line);
 	}
+	else if (!x)
+		ft_putchar('\n');
 	if (line)
 		free(line);
 	return (0);
