@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/07/02 05:54:08 by jraymond         ###   ########.fr        #
+#    Updated: 2018/07/02 07:31:08 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRCS = main.c \
 	   cd_handle_path_bis.c \
 	   cd_no_arg.c \
 	   cd_two_args.c \
+	   cd_oldpath.c \
+	   cd_normalpath.c \
 	   ret_fonc_cd.c \
 	   cd_builtin.c \
 	   first_char_cd.c \

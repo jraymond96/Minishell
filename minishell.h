@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 05:50:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 07:26:18 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int				ft_cd(char **param, char **envp);
 int				ret_fonc_cd(char **param);
 int				cd_no_arg(char **envp);
 int				cd_two_args(char **param, char **envp);
+int				cd_oldpath(char **envp);
+int				cd_normalpath(char *param, char **envp);
 int				change_oldpwd(char **envp, char *path);
 int				error_cd(char **param);
 int				ft_error1cd(char *param, char *path);

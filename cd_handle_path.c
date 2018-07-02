@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 14:30:45 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 03:18:16 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 07:26:20 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		check_first_folder(char *buf)
 	int			flag;
 	struct stat stats;
 
-	x = 0;
+	x = !buf[0] ? -1 : 0;
 	flag = 0;
 	while (buf[++x] && buf[x] != '/')
 		;

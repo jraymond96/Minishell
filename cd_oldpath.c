@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_builtin.c                                       :+:      :+:    :+:   */
+/*   cd_oldpath.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/19 14:10:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 07:26:35 by jraymond         ###   ########.fr       */
+/*   Created: 2018/07/02 06:17:15 by jraymond          #+#    #+#             */
+/*   Updated: 2018/07/02 06:44:53 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_cd(char **param, char **envp)
+int		cd_oldpath(char	**envp)
 {
-	int	ret;
+	int		x;
+	char	buf[1024];
 
-	ret = ret_fonc_cd(param);
-	if (ret == 0)
-		cd_normalpath(*param, envp);
-	else if (ret == 1)
-		cd_no_arg(envp);
-	else if (ret == 2)
-		cd_two_args(param, envp);
-	else if (ret == 3)
-		cd_oldpath(envp);
+	x = -1;
+	if (!envp)
+		x--;
+	if (!(getcwd(buf, 1024)))
+		exit(0);
+	while (x != -2 && ft_memcmp(envp[++x], "OLDPWD=", 7))
+		;
+	if (x == -2 || !envp[x] || !envp[x][7])
+	{
+		ft_putstr_fd("cd: OLDPWD not set\n", 2);
+		return (0);
+	}
+	if (chdir(&envp[x][7]) == -1)
+	{
+		ft_putstr_fd("error: chdir\n", 2);
+		return (0);
+	}
+	change_oldpwd(envp, buf);
 	return (0);
 }

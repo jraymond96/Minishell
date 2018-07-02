@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_no_arg.c                                        :+:      :+:    :+:   */
+/*   cd_normalpath.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/02 05:04:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 07:00:46 by jraymond         ###   ########.fr       */
+/*   Created: 2018/07/02 06:47:29 by jraymond          #+#    #+#             */
+/*   Updated: 2018/07/02 07:28:01 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		cd_no_arg(char **envp)
+int		cd_normalpath(char *param, char **envp)
 {
-	int		x;
+	char	*path;
 	char	buf[1024];
-	int		len;
+	int		ret;
 
-	x = -1;
-	if (!envp)
-		x--;
+	if (creat_pars_path(&path, param, envp) == -1)
+		return (-1);
+	ret = ft_strlen(path) - 1;
+	if (ret && path[ret] == '/')
+		path[ret] = '\0';
 	if (!(getcwd(buf, 1024)))
 		exit(0);
-	while (x != -2 && ft_memcmp(envp[++x], "HOME=", 5) != 0)
-		;
-	if (x < 0 || !envp[x])
+	if (check_path(path, ft_strlen(path) + 1, param) < 0)
 	{
-		ft_putstr_fd("cd: HOME not set\n", 2);
-		return (0);
+		if (path)
+			ft_memdel((void **)&path);
+		return (-1);
 	}
-	else
+	if (chdir(path) == -1)
 	{
-		len = ft_strlen(&envp[x][5]);
-		if (check_path(&envp[x][5], len + 1, NULL))
-			return (-1);
-		if (chdir(&(envp[x][5])) == -1)
-			ft_putstr_fd("error: chdir\n", 2);
+		ft_putstr_fd("error: chdir\n", 2);
+		return (-1);
 	}
 	change_oldpwd(envp, buf);
+	ft_memdel((void **)&path);
 	return (0);
 }
