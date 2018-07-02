@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:32 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 14:09:28 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 00:36:12 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ t_list	*sorting_path(char *path)
 t_list	*handle_path(char **envp)
 {
 	t_list	*paths;
-
+	
+	if (!envp)
+		return (NULL);
 	if (!(paths = pars_path(envp)))
 		return (NULL);
 	paths = path_permi(paths);
@@ -73,7 +75,7 @@ t_list	*pars_path(char **envp)
 		return (NULL);
 	while (envp[x] && ft_strncmp(envp[x], "PATH=", 5) != 0)
 		x++;
-	if (!envp[5] || !envp[x])
+	if (!envp[x] || ft_strlen(envp[x]) <= 5)
 		return (NULL);
 	path = sorting_path(envp[x]);
 	return (path);

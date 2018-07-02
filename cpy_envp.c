@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 09:58:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:50:23 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 00:22:33 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**cpy_envp(char **envp)
 	char	**new;
 	int		len;
 
+	if (!*envp)
+		return (NULL);
 	len = len_envp(envp);
 	if (!(new = ft_malloc(sizeof(char *) * (len + 1))))
 		exit(0);

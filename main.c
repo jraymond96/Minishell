@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 05:53:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 01:00:37 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_printf("%s%{red}> %{res}", getcwd(buff, 1024));
 	path = NULL;
 	envcpy = cpy_envp(envp);
-	while ((argc = get_next_line(2, &str)))
+	while ((argc = get_next_line(0, &str)))
 	{
 		if (argc == -1)
 		{

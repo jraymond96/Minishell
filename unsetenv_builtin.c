@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:46:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 15:40:58 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 00:43:31 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int		ft_unsetenv(char **value, char **envp)
 		return (-1);
 	}
 	len = ft_strlen(value[1]);
-	while (envp[x] && ft_memcmp(envp[x], value[1], len) != 0)
+	while (envp && envp[x] && ft_memcmp(envp[x], value[1], len) != 0)
 		x++;
-	if (envp[x])
+	if (envp && envp[x])
 		erase_value(envp, envp[x]);
 	return (0);
 }

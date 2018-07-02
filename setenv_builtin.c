@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 04:25:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 00:24:00 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**if_name(char *arg, char **envp)
 
 	x = -1;
 	len = ft_strlen(arg);
+	if (!envp)
+		return (NULL);
 	while (envp[++x])
 	{
 		if (ft_memcmp(envp[x], arg, len) == 0)
@@ -43,7 +45,8 @@ char	**add_namevalue(char *name, char *value, char ***envp)
 	while (new[x])
 		x++;
 	new[x] = name_value;
-	free_split(*envp);
+	if (*envp)
+		free_split(*envp);
 	*envp = new;
 	return (new);
 }

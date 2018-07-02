@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 14:55:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 02:19:48 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 00:38:48 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		ft_env(char **param, char **envp)
 	char	*tmp;
 
 	nb_call = nb_call_env(param);
+	if (!envp || !*envp)
+		return (0);
 	new_envp = cpy_envp(envp);
 	while (nb_call--)
 	{

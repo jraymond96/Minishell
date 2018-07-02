@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 19:25:19 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 02:41:56 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 21:55:29 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*found_home(char **envp)
 	x = -1;
 	if (!envp)
 		return (NULL);
-	while (envp[++x] && ft_memcmp(envp[x], "HOME", 4) != 0);
+	while (envp[++x] && ft_memcmp(envp[x], "HOME", 4) != 0)
+		;
 	return (envp[x]);
 }
 
@@ -86,7 +87,11 @@ int		creat_pars_path(char **path, char *param, char **envp)
 	char	new_path[1024];
 	int		x;
 
-	getcwd(pwd, 1024);
+	if (!(getcwd(pwd, 1024)))
+	{
+		ft_putstr_fd("error: getcwd\n", 2);
+		exit (0);
+	}
 	x = -1;
 	buff[0] = '\0';
 	if (first_char_cd(new_path, param, pwd, found_home(envp)) == -1)
