@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/28 17:31:57 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 05:53:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd("GNL failed\n", 2);
 			break;
 		}
-		if (ft_strcmp(str, "exit") == 0)
-			break;
 		if (check_entry(str) == 0)
 		{
 			path = handle_path(envcpy);

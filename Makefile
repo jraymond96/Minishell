@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/06/29 19:30:54 by jraymond         ###   ########.fr        #
+#    Updated: 2018/07/02 05:54:08 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRCS = main.c \
 	   del.c \
@@ -35,6 +35,10 @@ SRCS = main.c \
 	   error_setenv.c \
 	   split_path.c \
 	   cd_handle_path.c \
+	   cd_handle_path_bis.c \
+	   cd_no_arg.c \
+	   cd_two_args.c \
+	   ret_fonc_cd.c \
 	   cd_builtin.c \
 	   first_char_cd.c \
 	   error_cd.c \

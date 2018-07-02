@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 18:38:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 05:54:05 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	ret = 0;
 	while (shell_line[x] && shell_line[x] != ';')
 		x++;
+	if (shell_line[x] == ',')
+		shell_line++;
 	good_path = if_valid_order(paths, shell_line, &ret);
+	if (x == 0 && shell_line[x] == ';')
+		pars_order(&shell_line[++x], paths, envp);
 	if (!(split = split_line(shell_line, x)))
 		exit(0);
 	cut_space_usless(split);

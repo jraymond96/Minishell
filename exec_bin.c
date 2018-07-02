@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 19:30:47 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 19:50:17 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/06/29 21:15:24 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_bin(char **param, char **envp)
 	ret = ft_strlen(path) - 1;
 	if (path[ret] == '/')
 		path[ret] = '\0';
-	if (call_bin(&param[1], path, envp) == -1)
+	if (call_bin(param, path, envp) == -1)
 		return (-1);
 	return (0);
 }

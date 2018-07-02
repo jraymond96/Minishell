@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 13:40:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 19:39:56 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/02 02:12:52 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	call_order(char **line, t_list *path, char **envp)
 	pid_t	ret;
 	char	*all_path;
 
+	if (!*line)
+		return (0);
 	if ((ret = fork()) == -1)
 		ft_putstr_fd("fork: error\n", 2);
 	if (ret > 0)

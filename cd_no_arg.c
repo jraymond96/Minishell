@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   call_builtin.c                                     :+:      :+:    :+:   */
+/*   cd_no_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/15 13:50:52 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 01:31:47 by jraymond         ###   ########.fr       */
+/*   Created: 2018/07/02 05:04:43 by jraymond          #+#    #+#             */
+/*   Updated: 2018/07/02 05:50:44 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	call_builtin(int ret, char ***env, char **split)
+int		cd_no_arg(char **envp)
 {
-	if (ret == 1)
-		ft_env(split, *env);
-	else if (ret == 2)
+	int		x;
+	char	buf[1024];
+
+	x = -1;
+	if (!envp)
+		x--;
+	while (x != -2 && ft_memcmp(envp[++x], "HOME=", 5) != 0)
+		;
+	if (x < 0 || !envp[x])
 	{
-		if (ft_setenv(split, env) == -1)
-			exit (0);
+		ft_putstr_fd("cd: HOME not set\n", 2);
+		return (0);
 	}
-	else if (ret == 3)
-		ft_unsetenv(split, *env);
-	else if (ret == 4)
-		split[1] ? ft_cd(&split[1], *env) : ft_cd(NULL, *env);
-	else if (ret == 5)
-		ft_echo(split);
-	else if (ret == 6)
+	else
+	{
+		if (chdir(&(envp[x][5])) == -1)
+			ft_putstr_fd("error: chdir\n", 2);
+	}
+	if (!(getcwd(buf, 1024)))
 		exit(0);
-	else if (ret == 7)
-		ft_bin(split, *env);
+	change_oldpwd(envp, buf);
+	return (0);
 }

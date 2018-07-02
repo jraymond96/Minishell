@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd_handle_path.c                                   :+:      :+:    :+:   */
+/*   cd_handle_path_bis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/21 14:30:45 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 03:18:16 by jraymond         ###   ########.fr       */
+/*   Created: 2018/07/02 03:18:10 by jraymond          #+#    #+#             */
+/*   Updated: 2018/07/02 03:39:35 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_first_folder(char *buf)
+int		check1_first_folder(char *buf)
 {
 	int			x;
 	int			flag;
@@ -40,7 +40,7 @@ int		check_first_folder(char *buf)
 	return (0);
 }
 
-int		folder_exist(DIR *dir, int len, char *folder, char *path)
+int		folder1_exist(DIR *dir, int len, char *folder, char *path)
 {
 	struct dirent	*info;
 
@@ -62,7 +62,7 @@ int		folder_exist(DIR *dir, int len, char *folder, char *path)
 	return (0);
 }
 
-int		if_exist_permi(char *path, DIR *dir, char *param)
+int		if1_exist_permi(char *path, DIR *dir, char *param)
 {
 	char	**split;
 	int		x;
@@ -75,8 +75,8 @@ int		if_exist_permi(char *path, DIR *dir, char *param)
 	{
 		split[x + 1][ft_strclen(split[x + 1], '/')] = '\0';
 		len = ft_strclen(&split[x + 1][1], '/');
-		if ((ret = folder_exist(dir, len, &split[x + 1][1], *split)) != 0)
-			return (ft_error2cd(ret, param));
+		if ((ret = folder1_exist(dir, len, &split[x + 1][1], *split)) != 0)
+			return (ft_error1cd(param, path));
 		if (split[x + 2])
 		{
 			split[x + 1][ft_strclen(split[x + 1], '/')] = '/';
@@ -91,7 +91,7 @@ int		if_exist_permi(char *path, DIR *dir, char *param)
 	return (0);
 }
 
-int		check_path(char *path, int len, char *param)
+int		check1_path(char *path, int len, char *param)
 {
 	char		buf[len];
 	DIR			*dir;
@@ -100,7 +100,7 @@ int		check_path(char *path, int len, char *param)
 
 	buf[--len] = '\0';
 	ft_memcpy(buf, path, len);
-	if (check_first_folder(buf) == -1)
+	if (check1_first_folder(buf) == -1)
 		return (-2);
 	if ((ret = ft_strchr(&buf[1], '/')))
 	{
@@ -113,7 +113,7 @@ int		check_path(char *path, int len, char *param)
 		*(ret + 1) = tmp;
 	if (buf[ft_strlen(buf) - 1] == '/')
 		buf[ft_strlen(buf) - 1] = '\0';
-	if ((len = if_exist_permi(buf, dir, param) < 0))
+	if ((len = if1_exist_permi(buf, dir, param) <= 0))
 		return (-2);
 	return (0);
 }
