@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 20:07:23 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 19:11:51 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:48:17 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		check_permi(char *path, int len)
 			if ((len = if_permi(buf)) <= 0)
 				return (len);
 			buf[x] = '/';
-			
 		}
 		x++;
 	}

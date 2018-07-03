@@ -6,12 +6,11 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 13:40:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 02:12:52 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:23:34 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <errno.h>
 
 char	*join_path(char *str1, char *str2)
 {
@@ -20,7 +19,7 @@ char	*join_path(char *str1, char *str2)
 
 	len = ft_strlen(str1) + ft_strlen(str2) + 1;
 	if (!(new = ft_malloc(len + 1)))
-		exit (0);
+		exit(0);
 	new[len] = '\0';
 	len = -1;
 	while (*str1)
@@ -37,7 +36,7 @@ char	*join_path(char *str1, char *str2)
 	return (new);
 }
 
-int	call_order(char **line, t_list *path, char **envp)
+int		call_order(char **line, t_list *path, char **envp)
 {
 	pid_t	ret;
 	char	*all_path;

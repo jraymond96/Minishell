@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 16:44:35 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 17:43:52 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:47:10 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		env_call_order(char **param, char ***envp)
 	return (0);
 }
 
-int		write_envp(char	**envp)
+int		write_envp(char **envp)
 {
 	int	x;
 
@@ -61,10 +61,30 @@ int		write_envp(char	**envp)
 	return (0);
 }
 
+int		iter_env_bis(char **param, char ***envp, int *x)
+{
+	char	*ret;
+
+	while (param[++(*x)])
+	{
+		if ((ret = ft_strchr(param[*x], '=')))
+		{
+			if ((handle_envp(param[*x], envp, ret) == -1))
+				return (-1);
+		}
+		else
+		{
+			env_call_order(&param[*x], envp);
+			*x = -1;
+			break ;
+		}
+	}
+	return (0);
+}
+
 int		iter_env(char **param, char ***envp, int nb)
 {
 	int		x;
-	char	*ret;
 
 	if (len_envp(param) == 1)
 	{
@@ -79,20 +99,8 @@ int		iter_env(char **param, char ***envp, int nb)
 			return (-1);
 		x++;
 	}
-	while (param[++x])
-	{
-		if ((ret = ft_strchr(param[x], '=')))
-		{
-			if ((handle_envp(param[x], envp, ret) == -1))
-				return (-1);
-		}
-		else
-		{
-			env_call_order(&param[x], envp);
-			x = -1;
-			break;
-		}
-	}
+	if (iter_env_bis(param, envp, &x) == -1)
+		return (-1);
 	if (x != -1 && !nb)
 		return (write_envp(*envp));
 	return (0);

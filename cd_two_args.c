@@ -6,10 +6,9 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 05:29:27 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 05:51:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:34:21 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -45,7 +44,7 @@ int		replace_p0byp1(char **path, char **param)
 		return (-2);
 	}
 	if (!(*path = (char *)ft_malloc(len_new_path(pwd, ret, param) + 1)))
-		exit (0);
+		exit(0);
 	ft_memcpy(*path, pwd, (ret - pwd));
 	ft_strcpy(&(*path)[ret - pwd], param[1]);
 	ft_strcpy(&(*path)[ret - pwd + ft_strlen(param[1])],

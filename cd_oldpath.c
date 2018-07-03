@@ -6,13 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 06:17:15 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 06:44:53 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:24:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		cd_oldpath(char	**envp)
+int		cd_oldpath(char **envp)
 {
 	int		x;
 	char	buf[1024];

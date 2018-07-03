@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 04:26:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 06:39:52 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:47:49 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		change_oldpwd(char **envp, char *path)
 int		ret_fonc_cd(char **param)
 {
 	int	ret;
-	
+
 	if (!param)
 		return (1);
 	ret = len_envp(param);

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/04 18:49:44 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 00:07:41 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 04:47:13 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ void	cut_space_usless(char **split)
 	}
 }
 
+char	*pars_bis_init(char *shell_line, int *ret, int *x, int *len)
+{
+	*x = 0;
+	*len = ft_strlen(shell_line);
+	*ret = 0;
+	while (shell_line[*x] && shell_line[*x] != ';')
+		(*x)++;
+	if (shell_line[*x] == ',')
+		shell_line++;
+	return (shell_line);
+}
+
 void	pars_order(char *shell_line, t_list *paths, char ***envp)
 {
 	int		x;
@@ -46,13 +58,7 @@ void	pars_order(char *shell_line, t_list *paths, char ***envp)
 	t_list	*good_path;
 	char	**split;
 
-	x = 0;
-	len = ft_strlen(shell_line);
-	ret = 0;
-	while (shell_line[x] && shell_line[x] != ';')
-		x++;
-	if (shell_line[x] == ',')
-		shell_line++;
+	shell_line = pars_bis_init(shell_line, &ret, &x, &len);
 	good_path = if_valid_order(paths, shell_line, &ret);
 	if (x == 0 && shell_line[x] == ';')
 		pars_order(&shell_line[++x], paths, envp);

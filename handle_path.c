@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:48:07 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/13 05:20:21 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:05:34 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		how_path(char *path)
 int		len_path(char *str)
 {
 	int	i;
-	
+
 	if (!str)
 		return (0);
 	i = *str != ':' ? 0 : 1;

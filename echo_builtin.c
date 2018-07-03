@@ -6,13 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 08:02:59 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 17:51:46 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:36:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	len_all(char **argv)
+int		len_all(char **argv)
 {
 	int	x;
 	int	total_len;
@@ -24,7 +24,6 @@ int	len_all(char **argv)
 	while (argv[++x])
 		total_len += (ft_strlen(argv[x]) + 1);
 	return (total_len);
-		
 }
 
 void	join_arg(char **argv, char *line)

@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 20:45:24 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 14:05:12 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:04:38 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ int		if_no_env(char ***envp, char *param)
 		free_split(*envp);
 	*envp = new;
 	x = -1;
-	while ((*envp)[++x]);
+	while ((*envp)[++x])
+		;
 	if (!((*envp)[x] = ft_strdup(param)))
 		return (-1);
 	return (0);
 }
 
-int		if_env(char	**envp, char *param)
+int		if_env(char **envp, char *param)
 {
 	int	len;
 
@@ -52,7 +53,10 @@ int		handle_envp(char *param, char ***envp, char *equal)
 	len = equal - param;
 	x = -1;
 	if (*envp)
-		while ((*envp)[++x] && ft_memcmp((*envp)[x], param, len));
+	{
+		while ((*envp)[++x] && ft_memcmp((*envp)[x], param, len))
+			;
+	}
 	if (!*envp || !((*envp)[x]))
 	{
 		if (if_no_env(envp, param) == -1)

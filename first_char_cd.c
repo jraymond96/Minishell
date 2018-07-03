@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 18:27:15 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 21:36:47 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:07:23 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int		first_char_cd(char *buff, char *param, char *pwd, char *home)
 		ft_mem2join(buff, pwd, &param[1], ft_strlen(&param[1]));
 	else if (*param != '/')
 	{
-			ft_strcpy(buff, pwd);
-			ft_strcpy(&buff[ft_strlen(buff)], "/");
-			ft_strcpy(&buff[ft_strlen(buff)], param);
+		ft_strcpy(buff, pwd);
+		ft_strcpy(&buff[ft_strlen(buff)], "/");
+		ft_strcpy(&buff[ft_strlen(buff)], param);
 	}
 	return (0);
 }

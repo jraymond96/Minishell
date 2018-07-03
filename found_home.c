@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1.c                                            :+:      :+:    :+:   */
+/*   found_home.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/25 18:39:09 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 17:04:50 by jraymond         ###   ########.fr       */
+/*   Created: 2018/07/03 02:32:11 by jraymond          #+#    #+#             */
+/*   Updated: 2018/07/03 05:09:45 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*found_home(char **envp)
 {
+	int	x;
 
-	(void)argc;
-	ft_cd(&argv[1], envp);
-	while (1);
-	return (0);
+	x = -1;
+	if (!envp)
+		return (NULL);
+	while (envp[++x] && ft_memcmp(envp[x], "HOME", 4) != 0)
+		;
+	return (envp[x]);
 }

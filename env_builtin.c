@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 14:55:36 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 00:38:48 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:35:05 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	**next_call(char **param)
 	int	x;
 
 	x = -1;
-	while (param[++x] && ft_memcmp(param[x], "env", 3) != 0);
+	while (param[++x] && ft_memcmp(param[x], "env", 3) != 0)
+		;
 	return (&param[x]);
 }
 

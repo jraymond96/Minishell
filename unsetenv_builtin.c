@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:46:17 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 00:43:31 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:01:30 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	erase_value(char **envp, char *erase)
 				envp[x++] = envp[++y];
 			}
 			else
-				break;
+				break ;
 		}
 	}
 	envp[x] = NULL;

@@ -6,7 +6,7 @@
 #    By: jraymond <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/25 15:36:00 by jraymond          #+#    #+#              #
-#    Updated: 2018/07/03 00:43:44 by jraymond         ###   ########.fr        #
+#    Updated: 2018/07/03 05:08:29 by jraymond         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS = main.c \
 	   iter_env.c \
 	   handle_envp_env.c \
 	   split_line.c \
+	   found_home.c \
 	   exec_bin.c
 
 #COLORS
@@ -60,7 +61,8 @@ _END=\x1b[0m
 
 OBJS = $(SRCS:.c=.o)
 
-all : libft printf $(NAME)
+all : libft printf
+	make $(NAME) -j4
 
 .PHONY : all fclean clean re libft printf
 
@@ -78,8 +80,8 @@ ce : libft ft_printf $(NAME)
 	@echo "$(_YELLOW)$(NAME) result ...$(_END)"
 	@./minishell
 
-%.o : %.c
-		@$(CC) $(FLAGS) -o $@ -c $^
+%.o : %.c Makefile
+	$(CC) $(FLAGS) -o $@ -c $<
 
 clean :
 		@make clean -C libft
@@ -93,6 +95,6 @@ fclean : clean
 		@rm -rf $(NAME)
 		@echo "$(_RED)fclean : $(_GREEN)Done$(_END)"
 
-re :
+re:
 	@make fclean
 	@make

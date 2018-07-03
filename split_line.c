@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 17:57:57 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 02:00:38 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:03:07 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		nb_of_words(char *str, int size)
 	while (size && *str)
 	{
 		while (size && *str && (*str == ' ' || *str == '\t' || *str == '\n' ||
-				   	*str == '"' || *str == 39))
+				*str == '"' || *str == 39))
 		{
 			size--;
 			str++;
@@ -43,11 +43,11 @@ int		handle_word(char *str, char **new, int size)
 	int	len;
 
 	while (size > 0 && (str[size] == ' ' || str[size] == '\t' ||
-			   str[size] == '\n' || str[size] == '"' || str[size] == 39))
+				str[size] == '\n' || str[size] == '"' || str[size] == 39))
 		size--;
 	len = 0;
 	while (size > 0 && str[size] != ' ' && str[size] != '\t' &&
-			   str[size] != '\n' && str[size] != '"' && str[size] != 39)
+			str[size] != '\n' && str[size] != '"' && str[size] != 39)
 	{
 		size--;
 		len++;

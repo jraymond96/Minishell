@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 11:35:14 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/26 15:16:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:54:08 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	**split_path(char *path)
 	char	**new;
 	int		x;
 
-	if (!(new = ft_malloc(sizeof(char *) * ((len = nb_split(path)) + 1))))
+	len = nb_split(path);
+	if (!(new = ft_malloc(sizeof(char *) * (len + 1))))
 		return (NULL);
 	new[len] = NULL;
 	len = -1;

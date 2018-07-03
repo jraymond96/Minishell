@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 06:22:11 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 00:24:00 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 02:00:59 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ char	*change_value(char *value, char **envp, int size)
 		(*envp)[size + 1] = '\0';
 		return (*envp);
 	}
-	if (!(new = ft_malloc((size + 1) + (len = ft_strlen(value)) + 1)))
-		exit (0);
+	len = ft_strlen(value);
+	if (!(new = ft_malloc((size + 1) + (len + 1))))
+		exit(0);
 	ft_memcpy(new, *envp, (size + 1));
 	ft_strcpy(&new[size + 1], value);
 	ft_memdel((void **)envp);
@@ -87,6 +88,7 @@ int		ft_setenvnull(char **arg, char ***envp)
 	}
 	return (0);
 }
+
 int		ft_setenv(char **arg, char ***envp)
 {
 	char	**name;

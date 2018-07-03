@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/02 07:26:18 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:31:57 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int				first_char_cd(char *buff, char *param, char *pwd, char *home);
 char			*found_home(char **envp);
 int				creat_pars_path(char **path, char *param, char **envp);
 char			**split_line(char *str, size_t size);
+char			*found_home(char **envp);
 
 /*
 ** -----------------------BUILTINS-----------------------------

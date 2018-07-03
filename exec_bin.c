@@ -6,13 +6,13 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 19:30:47 by jraymond          #+#    #+#             */
-/*   Updated: 2018/06/29 21:15:24 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 03:35:46 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	call_bin(char **line, char *path, char **envp)
+int		call_bin(char **line, char *path, char **envp)
 {
 	pid_t	ret;
 
