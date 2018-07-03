@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 19:25:19 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 03:16:26 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 20:32:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	rm_lastfolder(char *buff)
 
 	if ((last_ocu = ft_strrchr(buff, '/')))
 		*last_ocu = '\0';
-	if ((last_ocu = ft_strrchr(buff, '/')))
-		*(last_ocu + 1) = '\0';
 }
 
 int		if_doublepoint(char *buff, char **split, int x)
@@ -40,10 +38,18 @@ int		if_doublepoint(char *buff, char **split, int x)
 
 	len = ft_strclen(&split[x][1], '/');
 	total = ft_strlen(buff);
-	if (x == 0)
+	if (ft_memcmp(&split[x][1], "./", 2) == 0)
+		return (0);
+	if (total == 0)
+	{
+		ft_memcpy(buff, split[x], (len + 1));
+		buff[len + 1] = '\0';
+		total++;
+	}
+	else if (x == 0)
 		ft_memcpy(buff, split[x], (len + 1));
 	else if (split[x][1] != '.' || ft_strclen(&split[x][1], '/') != 1)
-		ft_memcpy(&buff[ft_strlen(buff)], &split[x][1], len);
+		ft_memcpy(&buff[ft_strlen(buff)], split[x], (len += 2));
 	len += x == 0 ? total + 1 : total;
 	if (ft_strlen(buff) != 1)
 		ft_strcpy(&buff[len], "/");

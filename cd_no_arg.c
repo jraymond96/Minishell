@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 05:04:43 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 03:22:52 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 20:32:56 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		cd_no_arg(char **envp)
 		x--;
 	if (!(getcwd(buf, 1024)))
 		exit(0);
-	while (x != -2 && ft_memcmp(envp[++x], "HOME=", 5) != 0)
+	while (x != -2 && envp[++x] && ft_memcmp(envp[x], "HOME=", 5) != 0)
 		;
 	if (x < 0 || !envp[x])
 	{

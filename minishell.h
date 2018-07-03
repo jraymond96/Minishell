@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:30:55 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 03:31:57 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/03 20:32:25 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <dirent.h>
 # include <fcntl.h>
 
-typedef struct	 s_order
+typedef struct	s_order
 {
 	char		*order;
 	void		*ptr;
@@ -72,7 +72,7 @@ int				ft_error2cd(int ret, char *param);
 int				ft_unsetenv(char **value, char **envp);
 int				ft_setenv(char **arg, char ***envp);
 int				error_setenv(char **arg);
-int				ft_echo(char **arg);
+int				ft_echo(char **arg, char **envp);
 int				ft_env(char **param, char **envp);
 int				iter_env(char **param, char ***envp, int nb);
 int				handle_envp(char *param, char ***envp, char *equal);
