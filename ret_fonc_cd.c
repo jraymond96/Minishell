@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 04:26:25 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 03:47:49 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:09:21 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		change_oldpwd(char **envp, char *path)
 	x = -1;
 	if (!envp)
 		return (0);
-	while (ft_memcmp(envp[++x], "OLDPWD=", 7) != 0)
+	while (envp[++x] && ft_memcmp(envp[x], "OLDPWD=", 7) != 0)
 		;
 	if (envp[x])
 	{

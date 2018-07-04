@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 20:15:46 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 20:57:40 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:54:55 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	wrong_pars(char *str, int x)
 int		valid_separator(char c)
 {
 	if (ft_isalnum(c) == 1 || c == '.' || c == '_' || c == '-' || c == '/' ||
-			c == '~' || c == '=' || c == '"' || c == 39 || c == 36)
+			c == '~' || c == '=' || c == '"' || c == 39 || c == 36 || c == '\t'
+			|| c == ':')
 		return (1);
 	else
 		return (0);
@@ -56,7 +57,7 @@ char	*next(char *str)
 {
 	while (*str && valid_separator(*str) == 1)
 		str++;
-	if (*str == ';' || *str == ' ' || !*str)
+	if (!*str || *str == ';' || *str == ' ')
 		return (str);
 	else
 		wrong_pars(str, 0);
@@ -65,7 +66,7 @@ char	*next(char *str)
 
 int		check_entry(char *str)
 {
-	while (*str == ' ')
+	while (*str && (*str == ' ' || *str == '\t'))
 		str++;
 	while (*str)
 	{

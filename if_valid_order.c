@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 14:43:08 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 20:55:05 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:09:57 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ t_list	*if_valid_order(t_list *paths, char *shell_line, int *ret)
 
 	x = 0;
 	ret1 = 0;
-	while (*shell_line == ' ')
+	while (*shell_line && (*shell_line == ' ' || *shell_line == '\t'))
 		shell_line++;
 	while (shell_line[x] && shell_line[x] != ';' && shell_line[x] != ' ')
 		x++;
 	if (!(order = ft_memdup(shell_line, x)))
 		exit(0);
-	if (!paths && thats_builtin(order) != 1)
+	if (!paths && thats_builtin(order) != 1 && *shell_line)
 	{
 		ft_dprintf(2, "zsh: command not found: %s\n", order);
 		ret1++;

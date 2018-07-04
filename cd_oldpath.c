@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 06:17:15 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/03 03:24:13 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:20:16 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		cd_oldpath(char **envp)
 		x--;
 	if (!(getcwd(buf, 1024)))
 		exit(0);
-	while (x != -2 && ft_memcmp(envp[++x], "OLDPWD=", 7))
+	while (envp[++x] && x != -2 && ft_memcmp(envp[x], "OLDPWD=", 7))
 		;
 	if (x == -2 || !envp[x] || !envp[x][7])
 	{
