@@ -6,7 +6,7 @@
 /*   By: jraymond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 15:16:50 by jraymond          #+#    #+#             */
-/*   Updated: 2018/07/04 17:48:48 by jraymond         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:17:30 by jraymond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	loop_main(char *str, int argc, t_list *path, char ***envcpy)
 {
 	char	buff[1024];
 
+	buff[0] = '\0';
 	if (argc == -1)
 	{
 		ft_putstr_fd("error: GNL\n", 2);
@@ -44,6 +45,7 @@ int		main(int argc, char **argv, char **envp)
 	char	buff[1024];
 
 	(void)argv;
+	buff[0] = '\0';
 	if (!(getcwd(buff, 1024)))
 	{
 		ft_putstr_fd("error: getcwd\n", 2);
