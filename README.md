@@ -14,7 +14,7 @@ It's a interpretor of command, who handle variable environement.
 | cd | change directory |
 | env | display variable environement, execute an executable in edit environment (`env -i ./a.out` exec with empty environment) |
 | unsetenv | unset environment variable (`unsetenv PATH`) |
-| setenv | set nwe environmemt varaiable (` setenv NEWVAR contents_ofnewvar`) |
+| setenv | set new environmemt varaiable (` setenv NEWVAR contents_ofnewvar`) |
 | echo | print the argument(s) of exectuable |
 | exit | exit programme |
 
