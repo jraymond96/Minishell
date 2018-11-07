@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-It's a interpretor of command, who handle variable environement.
+It's a interpretor of command, who handle environement variable.
 
 ## WHAT CAN YOU DO WITH ?
 
